@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "title": "Joonas Kylliäinen",
+    "designation": "CEO at Norders",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ac lorem ac mi sagittis consectetur.",
+    "image_url": "https://media.licdn.com/dms/image/D4D03AQEGc7lNQFuE_A/profile-displayphoto-shrink_200_200/0/1694759943604?e=1718236800&v=beta&t=N-bkJ6ccyfIph2c-AarLl75SibZcSIYwyMWKY8wdYlc"
+  },
+  {
+    "id": 2,
+    "title": "Leevi Eerola",
+    "designation": "Founder at Agency Velocity",
+    "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "image_url": "https://yt3.googleusercontent.com/4haqyF8H4uXhRtpB7yTr2I5r2adilNuilIDr_ydfBKlbaY-j9OS0hnUuFZ4vkVZYbz0rZZjE=s160-c-k-c0x00ffffff-no-rj"
+  },
+  {
+    "id": 3,
+    "title": "Omar Abdalla",
+    "designation": "Founder at Fenixtal",
+    "description": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "image_url": "https://media.licdn.com/dms/image/D4D03AQGju9S0HPjzxQ/profile-displayphoto-shrink_200_200/0/1679776844563?e=1718236800&v=beta&t=0xX135jBnLosRea8scg-eIAOQQU9cGhHt1tYRmLnD_M"
+  },
+  {
+    "id": 4,
+    "title": "Toni J. Young",
+    "designation": "Founder + CEO @ 365Growth.io",
+    "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "image_url": "https://media.licdn.com/dms/image/D5603AQF7hZcUJie5EA/profile-displayphoto-shrink_200_200/0/1707438687724?e=1718236800&v=beta&t=Wph7ri7a87lM2xATTaCvGueZfT1yw37r1ju2FoNT1mM"
+  },
+  {
+    "id": 5,
+    "title": "Nuala Canning",
+    "designation": "Founder & MD @ Brandfire",
+    "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "image_url": "https://media.licdn.com/dms/image/C4E03AQHuAbavOKIh6A/profile-displayphoto-shrink_200_200/0/1614006264816?e=1718236800&v=beta&t=1B0pxjIWQWMoo7IjTYYXLwmAJqiVLZxLjdY-NkgkwG0"
+  },
+  {
+    "id": 6,
+    "title": "Sonja Häyhä",
+    "designation": "Partner & Head of Demand Gen Services at Norders",
+    "description": "Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "image_url": "https://media.licdn.com/dms/image/D4D03AQHcq3F9Ha7BOA/profile-displayphoto-shrink_200_200/0/1694745362896?e=1718236800&v=beta&t=mGGHRPpwQTO0v7QakUvz7n3Lk54_cWR4is5_uN8Vx08"
+  },
+  {
+    "id": 7,
+    "title": "Jacques Suttle",
+    "designation": "Founder @Converting Cold Traffic",
+    "description": "Voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "image_url": "https://media.licdn.com/dms/image/D4E03AQE_7eFdEQwfDw/profile-displayphoto-shrink_200_200/0/1711309175963?e=1718236800&v=beta&t=kifKqV1eVbRWu0bn9ps5wVSXCq0Ig5o6hvWTW2_Foy4"
+  },
+  {
+    "id": 8,
+    "title": "Zane Wasati",
+    "designation": "Founder & CEO @ SalesSourcers",
+    "description": "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "image_url": "https://media.licdn.com/dms/image/D5603AQHrXwKTXflXAQ/profile-displayphoto-shrink_200_200/0/1707900382003?e=1718236800&v=beta&t=aVvKO6WtZSSzn4Sc6ozAnt-P8HEgNpsX_q2qkJhRHgs"
+  },
+  {
+    "id": 9,
+    "title": "Joel Stoehr",
+    "designation": " Founder convi.io",
+    "description": "Mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "image_url": "https://media.licdn.com/dms/image/D4E03AQH7H22B_qdxhw/profile-displayphoto-shrink_200_200/0/1682187742516?e=1718236800&v=beta&t=dg8g3kOe-gG-0zDytCzFXxGaj_geVcEoo7uyBb8iKYw"
+  }
+]
