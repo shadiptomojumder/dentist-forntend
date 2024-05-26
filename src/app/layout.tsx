@@ -5,7 +5,7 @@ import "./globals.css";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import TanstackProvider from "@/TanstackProvider/TanstackProvider";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "@/components/ui/sonner"
 import UserContextProvider from "@/context/UserContext/UserContext";
 
 
@@ -36,7 +36,7 @@ export default function RootLayout({
             >
               <Header></Header>
               {children}
-              <Toaster/>
+              <Toaster richColors/>
               <Footer></Footer>
             </ThemeProvider>
           </TanstackProvider>

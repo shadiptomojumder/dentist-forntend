@@ -1,18 +1,16 @@
 "use client";
+import Register from "@/api/user/register";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner"
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ChangeEvent, useState } from "react";
-import { FieldError, SubmitHandler, useForm } from "react-hook-form";
-import { z } from "zod";
-import { api } from "../../api/api";
-import Register from "@/api/user/register";
-import axios from "axios";
-import Spinner from "../components/Spinner/Spinner";
 import { useRouter } from "next/navigation";
-
+import { SubmitHandler, useForm } from "react-hook-form";
+import { z } from "zod";
+import Link from "next/link";
+import { useMutation } from "@tanstack/react-query";
+import Spinner from "../components/Spinner/Spinner";
 
 const formSchema = z.object({
   fullname: z.string().min(2, {
@@ -29,7 +27,6 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 const Signup = () => {
-  const { toast } = useToast();
   const router = useRouter();
 
   const {
@@ -40,35 +37,29 @@ const Signup = () => {
     reset,
   } = useForm<FormData>({ resolver: zodResolver(formSchema) });
 
-  const onSubmit: SubmitHandler<FormData> = async (data) => {
-    try {
-      const response = await Register(data)
-
-      console.log("The response in Forntend is", response);
-
+  const { mutate , isPending } = useMutation({
+    mutationFn: Register,
+    onSuccess: (response) => {     
       if (response.statusCode === 200) {
-        toast({
-          description: "User successfully registered",
-        });
+        toast.success("User successfully registered")
         reset();
         router.push("/login");
       }
-    } catch (error:any) {
-      console.log("The Error 149 is:", error);
-      //console.log("The Error Responce is:", error?.response?.data);
-      
+    },
+    onError: (error:any) => {
       if (error?.response?.status == 409) {
-        toast({
-          description:"Username or Email already registered !!",
-        }); 
+        toast.warning("Username or Email already registered !!")
+
       } else if (error.request) {
-        // The request was made but no response was received
-        console.error("No response received from the server");
+        toast.error("No response received from the server!!")
       } else {
-        // Something else happened while setting up the request
         console.error("Error while sending the request:", error.message);
       }
     }
+  })
+
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    await mutate(data)
   };
 
   return (
@@ -81,7 +72,6 @@ const Signup = () => {
           </p>
         </div>
         <form target="" className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-
           <div>
             <div className="space-y-2">
               <Label htmlFor="fullname">Full Name *</Label>
@@ -92,7 +82,11 @@ const Signup = () => {
                 placeholder="Enter your full name"
               />
             </div>
-            {errors.fullname && <span className="text-red-500 text-xs">{errors.fullname.message}</span>}
+            {errors.fullname && (
+              <span className="text-red-500 text-xs">
+                {errors.fullname.message}
+              </span>
+            )}
           </div>
 
           <div>
@@ -106,7 +100,11 @@ const Signup = () => {
                 type="email"
               />
             </div>
-            {errors.email && <span className="text-red-500 text-xs">{errors.email.message}</span>}
+            {errors.email && (
+              <span className="text-red-500 text-xs">
+                {errors.email.message}
+              </span>
+            )}
           </div>
 
           <div>
@@ -121,19 +119,31 @@ const Signup = () => {
               />
             </div>
             {errors.password && (
-              <span className="text-red-500 text-xs">{errors.password.message}</span>
+              <span className="text-red-500 text-xs">
+                {errors.password.message}
+              </span>
             )}
           </div>
 
-          
-            
-          {/* <Button className="w-full hover:bg-green-400 gap-2 justify-center" type="submit" disabled>
-            <Spinner/>
-            Sign Up
-          </Button> */}
-          <Button className="w-full hover:bg-green-400" type="submit">
-            Sign Up
+          <Button className="w-full hover:bg-green-400 gap-2 justify-center text-black font-bold" type="submit" disabled={isPending}>
+            {
+              isPending? <><Spinner/> Sign Up</> : "Sign Up"
+            }
           </Button>
+          <Button
+              className="flex items-center gap-2 w-full"
+              variant="outline"
+            >
+              Sign up with Google
+            </Button>
+            <div className="flex items-center justify-center">
+              <div className="text-sm text-gray-500 dark:text-white">
+                Already have an account?
+                <Link className="font-medium underline" href="/login">
+                  {""} Login
+                </Link>
+              </div>
+            </div>
         </form>
       </div>
     </div>

@@ -29,5 +29,5 @@ export function middleware(request: NextRequest) {
  
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ['/products','/profile'],
+  matcher: ['/products','/profile','/login','/signup'],
 }

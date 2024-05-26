@@ -10,16 +10,17 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useToast } from "@/components/ui/use-toast";
 import { UserContext } from "@/context/UserContext/UserContext";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios, { AxiosError } from "axios";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useContext } from "react";
+import { toast } from "sonner";
 
+import { useMutation } from "@tanstack/react-query";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
+import Spinner from "../components/Spinner/Spinner";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -32,10 +33,9 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 const LoginPage = () => {
-  const { toast } = useToast();
   const router = useRouter();
   const { setUser } = useContext(UserContext);
-  
+
   const {
     register,
     setValue,
@@ -44,49 +44,35 @@ const LoginPage = () => {
     reset,
   } = useForm<FormData>({ resolver: zodResolver(formSchema) });
 
-  const onSubmit: SubmitHandler<FormData> = async (data) => {
-    console.log("The Data is", data);
-    try {
-      const response = await Login(data);
-      console.log("The Login Response is", response);
-
+  const { mutate, isPending } = useMutation({
+    mutationFn: Login,
+    onSuccess: (response) => {
       if (response.statusCode === 200) {
-        toast({
-          description: "User successfully Login",
-        });
+        toast.success("User successfully Login");
 
         reset();
-        router.push("/");
-        router.refresh();
-
-        setUser(response.data.loggedInUser);
-
-        window.localStorage.setItem(
+        localStorage.setItem(
           "userData",
           JSON.stringify(response.data.loggedInUser)
         );
-
+        setUser(response.data.loggedInUser);
+        router.push("/");
       }
-    } catch (error) {
-      console.log("The Error in Login is:", error);
-
-      // Type assertion for AxiosError
-      if (axios.isAxiosError(error)) {
-        const axiosError = error as AxiosError;
-        if (axiosError.response?.status === 400 || axiosError.response?.status === 401) {
-          toast({
-            description: "Username or Password don't match !!",
-          });
-        }
+    },
+    onError: (error: any) => {
+      if (error?.response?.status == 400 || error?.response?.status == 401) {
+        toast.warning("Email or Password don't match !!");
+      } else if (error.request) {
+        toast.error("No response received from the server!!");
       } else {
-        // Handle other error types
-        toast({
-          description: "An unexpected error occurred.",
-        });
+        console.error("Error while sending the request:", error.message);
       }
-    }
-  };
+    },
+  });
 
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    await mutate(data);
+  };
 
   return (
     <div className="flex h-screen w-full items-center justify-center bg-gray-100 px-4 dark:bg-gray-950">
@@ -96,17 +82,17 @@ const LoginPage = () => {
             Login
           </CardTitle>
           <CardDescription className="text-center">
-            Enter your email or username and password to access your account.
+            Enter your email and password to access your account.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
             <div>
               <div className="space-y-2">
-                <Label htmlFor="email-username">Email or Username</Label>
+                <Label htmlFor="email-username">Email</Label>
                 <Input
                   id="email-username"
-                  placeholder="Enter your email or username"
+                  placeholder="Enter your email"
                   {...register("email")}
                   type="text"
                 />
@@ -140,8 +126,12 @@ const LoginPage = () => {
               )}
             </div>
 
-            <Button className="w-full hover:bg-green-400" type="submit">
-              Login
+            <Button
+              className="w-full hover:bg-green-400 gap-2 justify-center font-bold text-black"
+              type="submit"
+              disabled={isPending}
+            >
+              {isPending ? <><Spinner /> Login</> : "Login"}
             </Button>
             <Button
               className="flex items-center gap-2 w-full"
@@ -152,7 +142,7 @@ const LoginPage = () => {
             <div className="flex items-center justify-center">
               <div className="text-sm text-gray-500 dark:text-white">
                 Don&apos;t have an account?
-                <Link className="font-medium underline" href="#">
+                <Link className="font-medium underline" href="/signup">
                   {""} Sign up
                 </Link>
               </div>

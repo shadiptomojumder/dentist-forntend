@@ -90,3 +90,9 @@
   background-size: 30px 30px;
   background-position: -5px -5px
 }
+
+.boxglow {
+  -webkit-box-shadow: 0px 0px 10px 3px rgba(169, 255, 138, 1);
+  -moz-box-shadow: 0px 0px 10px 3px rgba(169, 255, 138, 1);
+  box-shadow: 0px 0px 10px 3px rgba(169, 255, 138, 1);
+}

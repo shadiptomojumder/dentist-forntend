@@ -41,9 +41,9 @@ const HeroSection = () => {
               growth in your business.
             </p>
             <div className="flex items-center">
-              <Link href="/contact">
+              <Link href="/appointment">
                 <Button className="bg-[#BFD8AF] text-black dark:hover:text-primary font-semibold hover:bg-transparent hover:border-[#BFD8AF] hover:border hover:shadow-md">
-                  Get Started
+                  Book Appointment
                 </Button>
               </Link>
             </div>

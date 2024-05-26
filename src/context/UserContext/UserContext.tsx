@@ -4,7 +4,7 @@ import React, { createContext, useState, useEffect, ReactNode, FC } from 'react'
 // Define the shape of the user object and the context value
 interface User {
   id: string;
-  name: string;
+  fullname: string;
   email: string;
   // Add other fields as needed
 }
@@ -33,20 +33,23 @@ const UserContextProvider: FC<UserContextProviderProps> = ({children}) => {
     // Load user data from localStorage on component mount
     useEffect(() => {
         const storedUser = localStorage.getItem('userData');
-        console.log("The storedUser is:",storedUser);
-
+        // console.log("The storedUser is:",storedUser);
         
         if (storedUser) {
           try {
-            const parsedUser = JSON.parse(storedUser);
-            setUser(parsedUser);
+            const parsedUser = JSON.parse(storedUser);           
+              setUserLoading(false);
+              setUser(parsedUser);          
+            
           } catch (error) {
             console.error("Error parsing stored user data:", error);
             // Handle the error appropriately (e.g., clear the invalid data from localStorage)
             localStorage.removeItem('userData');
           }
+        } else{
+          setUserLoading(false);
         }
-        setUserLoading(false);
+        
     }, []);
 
 
