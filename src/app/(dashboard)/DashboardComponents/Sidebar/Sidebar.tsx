@@ -16,6 +16,11 @@ const QuickLinks = [
     link: "/dashboard/dashboard-profile",
   },
   {
+    id: 9,
+    title: "Create an appointment",
+    link: "/dashboard/dashboard-create-appointment",
+  },
+  {
     id: 3,
     title: "Appointments",
     link: "/dashboard/dashboard-appointments",
@@ -59,9 +64,9 @@ const Sidebar = () => {
     }
   };
   return (
-    <main className="p-6 pb-40 bg-[#040D12] min-w-[288px] h-full border-2 border-gray-200 rounded-lg">
+    <main className="p-6 pb-40  min-w-[288px] h-full rounded-lg hidden lg:block">
       {/* Profile picture */}
-      <section className="mb-11">
+      {/* <section className="mb-11">
         <div className="text-center bg-white rounded-full relative w-max mx-auto">
           <div
             onClick={handleImageClick}
@@ -76,7 +81,7 @@ const Sidebar = () => {
           </div>
         </div>
         <h2>Profile Picture</h2>
-      </section>
+      </section> */}
 
       {/* All the Links */}
       <section className="space-y-5">

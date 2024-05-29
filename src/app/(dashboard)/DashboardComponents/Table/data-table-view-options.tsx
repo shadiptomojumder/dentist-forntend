@@ -16,11 +16,11 @@ export function DataTableViewOptions<TData>({
 }: DataTableViewOptionsProps<TData>) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild className="bg-[#040D12] py-[17px] focus:border-primary">
+      <DropdownMenuTrigger asChild className="bg-[#040D12] py-[17px] w-full focus-visible:right-0 focus-visible:bg-green-500">
         <Button
           variant="outline"
           size="sm"
-          className="ml-auto hidden h-8 lg:flex text-sm"
+          className="ml-auto h-8 text-sm"
         >
           <MixerHorizontalIcon className="mr-2 h-4 w-4" />
           View

@@ -65,7 +65,7 @@ function DataTableFilterByDate<TData, TValue>({
 
   React.useEffect(() => {
     column?.setFilterValue(todayOption.value);
-  }, [column,todayOption.value]);
+  }, [todayOption.value]);
 
   return (
     <>
@@ -73,8 +73,8 @@ function DataTableFilterByDate<TData, TValue>({
         onValueChange={handleSelectionChange}
         defaultValue={`${todayOption.value}`}
       >
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select a fruit" />
+        <SelectTrigger className="sm:min-w-[180px] w-full focus:ring-0">
+          <SelectValue placeholder="Select a date" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>

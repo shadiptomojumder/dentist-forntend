@@ -12,35 +12,42 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
-import { ColumnDef, FilterFn, Row, SortingFn } from "@tanstack/react-table";
-import SortByDate from "./date-sorting";
-import { parseISO, format, compareAsc } from 'date-fns';
+import { ColumnDef } from "@tanstack/react-table";
 import { DataTableColumnHeader } from "./data-table-column-header";
-// This type is used to define the shape of our data.
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import ViewCustomerModal from "./ViewCustomerModal";
+import StatusChangeOption from "./StatusChangeOption";
+import ActionButton from "./ActionButton";
 
 // You can use a Zod schema here if you want.
-export type Payment = {
+export type AppointmentData = {
+  // Define the structure of your appointmentData prop here
   _id: string;
-  name?: string;
-  phone?: string;
-  service?: string;
-  appointmentDate?: string;
-  appointmentTime?: string;
-  amount?: number;
-  status: "pending" | "booked" | "done" | "failed";
-  email?: string;
+  name: string,
+  phone: string,
+  address: string,
+  service: string,
+  appointmentDate: string,
+  appointmentTime: string,
+  message: string,
+  status: "pending" | "booked" | "done" | "failed",
+  createdBy: string,
+  createdAt: string,
+  updatedAt: string,
+  __v: number
 };
 
-
-
-
-
-
-
-
-
-
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<AppointmentData>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -69,7 +76,7 @@ export const columns: ColumnDef<Payment>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Name" />
     ),
-    cell: ({ row }) => <div className="capitalize">{row.getValue("name")}</div>,
+    cell: ({ row }) => <div className="capitalize text-nowrap">{row.getValue("name")}</div>,
   },
   {
     id: "appointmentDate",
@@ -78,7 +85,9 @@ export const columns: ColumnDef<Payment>[] = [
       <DataTableColumnHeader column={column} title="Appointment Date" />
     ),
     enableSorting: true,
-    cell: ({ row }) => <div className="capitalize">{row.getValue("appointmentDate")}</div>,
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("appointmentDate")}</div>
+    ),
   },
   {
     id: "appointmentTime",
@@ -110,15 +119,15 @@ export const columns: ColumnDef<Payment>[] = [
       return (
         <>
           {status === "pending" && (
-            <Badge variant="outline" className="">
+            <Badge variant="default" className="bg-[#FFE569] hover:bg-[#FFE569]">
               {row.getValue("status")}
             </Badge>
           )}
           {status === "booked" && (
-            <Badge variant="default">{row.getValue("status")}</Badge>
+            <Badge variant="default" className="hover:bg-primary">{row.getValue("status")}</Badge>
           )}
           {status === "done" && (
-            <Badge variant="default" className="bg-[#297c0b] text-gray-200">
+            <Badge variant="default" className="bg-[#297c0b] hover:bg-[#297c0b] text-gray-200">
               {row.getValue("status")}
             </Badge>
           )}
@@ -129,35 +138,18 @@ export const columns: ColumnDef<Payment>[] = [
       );
     },
     filterFn: (row, status, value) => {
-        return value.includes(row.getValue(status))
+      return value.includes(row.getValue(status));
     },
   },
   {
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original;
-
+      const apoointment = row.original;
+      console.log("Apointment", apoointment);
+      
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <DotsHorizontalIcon className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment._id)}
-            >
-              Copy payment ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <ActionButton apoointment={apoointment}/>
       );
     },
   },

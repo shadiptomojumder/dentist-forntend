@@ -134,11 +134,11 @@ const AppointmentPage = () => {
             <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
             <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                <Label htmlFor="name">Name</Label>
+                <Label htmlFor="name" className="text-base">Name <span className="text-red-500">*</span></Label>
                 <Input
                     id="name"
                     placeholder="Enter your name"
-                    className="focus:border-primary"
+                    className="focus:border-primary h-11"
                     {...register("name")}
                 />
                 {errors.name && (
@@ -148,12 +148,12 @@ const AppointmentPage = () => {
                 )}
                 </div>
                 <div className="space-y-2">
-                <Label htmlFor="phone">Phone Number</Label>
+                <Label htmlFor="phone" className="text-base">Phone Number <span className="text-red-500">*</span></Label>
                 <Input
                     id="phone"
                     placeholder="Enter your phone number"
                     type="tel"
-                    className="focus:border-primary"
+                    className="focus:border-primary h-11"
                     {...register("phone")}
                 />
                 {errors.phone && (
@@ -163,12 +163,13 @@ const AppointmentPage = () => {
                 )}
                 </div>
             </div>
+
             <div className="space-y-2">
-                <Label htmlFor="address">Address (optional)</Label>
+                <Label htmlFor="address" className="text-base">Address (optional)</Label>
                 <Textarea
                 id="address"
                 placeholder="Enter your address"
-                className="focus:border-primary"
+                className="focus:border-primary h-11"
                 {...register("address")}
                 />
                 {errors.address && (
@@ -177,15 +178,16 @@ const AppointmentPage = () => {
                 </span>
                 )}
             </div>
+
             <div className="space-y-2">
-                <Label htmlFor="service">Service</Label>
+                <Label htmlFor="service" className="text-base">Service <span className="text-red-500">*</span></Label>
                 <Controller
                 name="service"
                 control={control}
                 defaultValue=""
                 render={({ field }) => (
                     <Select onValueChange={field.onChange}>
-                    <SelectTrigger className="focus:border-primary">
+                    <SelectTrigger className="focus:border-primary h-11">
                         <SelectValue placeholder="Select a service" />
                     </SelectTrigger>
                     <SelectContent>
@@ -206,8 +208,8 @@ const AppointmentPage = () => {
             </div>
 
             <div className="space-y-2">
-                <Label htmlFor="appointmentDate" className="block">
-                Appointment Date
+                <Label htmlFor="appointmentDate" className="text-base">
+                Appointment Date <span className="text-red-500">*</span>
                 </Label>
                 <Controller
                 name="appointmentDate"
@@ -215,7 +217,7 @@ const AppointmentPage = () => {
                 defaultValue={date}
                 render={({ field }) => (
                     <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-                    <PopoverTrigger asChild>
+                    <PopoverTrigger asChild className="h-11">
                         <Button
                         variant={"outline"}
                         className={cn(
@@ -257,25 +259,26 @@ const AppointmentPage = () => {
                 </span>
                 )}
             </div>
+
             <div className="space-y-2">
-                <Label htmlFor="appointmentTime">Appointment Time</Label>
+                <Label htmlFor="appointmentTime" className="text-base">Appointment Time <span className="text-red-500">*</span></Label>
                 <Controller
                 name="appointmentTime"
                 control={control}
                 defaultValue=""
                 render={({ field }) => (
                     <Select onValueChange={field.onChange}>
-                    <SelectTrigger>
-                        <SelectValue placeholder="Select a time" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value="9:00am">9:00 AM</SelectItem>
-                        <SelectItem value="10:00am">10:00 AM</SelectItem>
-                        <SelectItem value="11:00am">11:00 AM</SelectItem>
-                        <SelectItem value="1:00pm">1:00 PM</SelectItem>
-                        <SelectItem value="2:00pm">2:00 PM</SelectItem>
-                        <SelectItem value="3:00pm">3:00 PM</SelectItem>
-                    </SelectContent>
+                        <SelectTrigger className="focus:ring-0 h-11">
+                            <SelectValue placeholder="Select a time" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="9:00 AM to 10:00 AM">9:00 AM to 10:00 AM</SelectItem>
+                            <SelectItem value="10:00 AM to 11:00 AM">10:00 AM to 11:00 AM</SelectItem>
+                            <SelectItem value="11:00 AM to 12:00 PM">11:00 AM to 12:00 PM</SelectItem>
+                            <SelectItem value="12:00 PM to 1:00 PM">12:00 PM to 1:00 PM</SelectItem>
+                            <SelectItem value="2:00 PM to 3:00 PM">2:00 PM to 3:00 PM</SelectItem>
+                            <SelectItem value="3:00 PM to 4:00 PM">3:00 PM to 4:00 PM</SelectItem>
+                        </SelectContent>
                     </Select>
                 )}
                 />
@@ -287,7 +290,7 @@ const AppointmentPage = () => {
             </div>
 
             <div className="space-y-2">
-                <Label htmlFor="message">Message (optional)</Label>
+                <Label htmlFor="message" className="text-base">Message (optional)</Label>
                 <Textarea
                 id="message"
                 placeholder="Enter any additional information"

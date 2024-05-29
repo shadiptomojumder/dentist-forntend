@@ -60,18 +60,18 @@ export function DataTableToolbar<TData>({
     );
 
   return (
-    <div className="flex items-center justify-between">
-      <section className="flex flex-1 items-center space-x-2">
-        <div>
+    <div className="flex md:flex-row flex-col gap-3 items-center justify-between">
+      <section className="flex gap-4 items-center md:justify-start justify-between md:w-fit w-full">
+        <div className="w-1/2 md:w-fit">
           <Input
             placeholder="Filter by anything..."
             value={filtering}
             onChange={(event) => setFiltering(event.target.value)}
-            className="max-w-[250px] focus:border-primary"
+            className="md:min-w-[250px] w-full focus:border-primary"
           />
         </div>
 
-        <div>
+        <div className="w-1/2 md:w-fit">
           {table.getColumn("status") && (
             <DataTableFacetedFilter
               column={table.getColumn("status")}
@@ -80,7 +80,7 @@ export function DataTableToolbar<TData>({
             />
           )}
 
-          {isFacetFiltered && (
+          {/* {isFacetFiltered && (
             <Button
               variant="ghost"
               onClick={() => table.resetColumnFilters()}
@@ -89,19 +89,23 @@ export function DataTableToolbar<TData>({
               Reset
               <Cross2Icon className="ml-2 h-4 w-4" />
             </Button>
-          )}
+          )} */}
         </div>
       </section>
 
-      <section className="flex items-center gap-4">
-        {table.getColumn("appointmentDate") && (
-          <DataTableFilterByDate
-            column={table.getColumn("appointmentDate")}
-            title="Date"
-          />
-        )}
+      <section className="flex items-center gap-4 md:w-fit w-full">
+        <div className="w-1/2 md:w-fit">
+          {table.getColumn("appointmentDate") && (
+            <DataTableFilterByDate
+              column={table.getColumn("appointmentDate")}
+              title="Date"
+            />
+          )}
+        </div>
 
-        <DataTableViewOptions table={table} />
+        <div className="w-1/2 md:w-fit">
+          <DataTableViewOptions table={table} />
+        </div>
       </section>
     </div>
   );
