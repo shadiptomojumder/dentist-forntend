@@ -1,4 +1,5 @@
 "use client"
+import { Separator } from '@/components/ui/separator';
 import { UserContext } from '@/context/UserContext/UserContext';
 import React, { useContext } from 'react';
 
@@ -10,10 +11,15 @@ if (userLoading){
     return <p>Loading..</p>
 }
     return (
-        <div>
-            <h2>Dashboard Profile Page</h2>
-            <h2>{user?.fullname}</h2>
-        </div>
+        <main>
+            <h1 className="text-2xl text-gray-200 font-bold">
+                Profile
+            </h1>
+            <p className="text-gray-500 dark:text-gray-400">
+                This is how others will see you on the site.
+            </p>
+            <Separator className="my-4" />
+        </main>
     );
 };
 

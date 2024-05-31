@@ -35,7 +35,7 @@ import { Button } from "@/components/ui/button"
     return (
       <div className={cn("flex items-center space-x-2", className)}>
         <DropdownMenu>
-          <DropdownMenuTrigger asChild className="focus:border-none">
+          <DropdownMenuTrigger asChild className="focus:border-none focus-visible:ring-0">
             <Button
               variant="ghost"
               size="sm"

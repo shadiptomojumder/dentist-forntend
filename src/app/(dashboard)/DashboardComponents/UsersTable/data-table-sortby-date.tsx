@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/select";
 import { CheckIcon } from "@radix-ui/react-icons";
 import { Column } from "@tanstack/react-table";
-import { format } from "date-fns";
+import { addDays, format, subDays , isFriday , isSaturday } from "date-fns";
 import * as React from "react";
 
 interface DataTableFilterProps<TData, TValue> {
@@ -30,6 +30,24 @@ function DataTableFilterByDate<TData, TValue>({
     new Set()
   );
 
+
+
+
+  const today = new Date();
+
+
+  const filteredOptions = Array.from({ length: 9 }, (_, index) => {
+    const date = index < 3 ? subDays(today, 3 - index) : addDays(today, index - 3);
+    return {
+      label: format(date, "dd MMMM yyyy"),
+      value: format(date, "dd MMMM yyyy"),
+      icon: CheckIcon,
+    };
+  });
+
+
+
+
   const todayOption = {
     label: "Today",
     value: format(new Date(), "dd MMMM yyyy"),
@@ -44,7 +62,7 @@ function DataTableFilterByDate<TData, TValue>({
     icon: CheckIcon,
   };
 
-  const filteredOptions = [todayOption, tomorrowOption];
+  // const filteredOptions = [todayOption, tomorrowOption];
 
   const [selectedFruit, setSelectedFruit] = React.useState<any>(null);
 
@@ -81,7 +99,7 @@ function DataTableFilterByDate<TData, TValue>({
             {filteredOptions.map((option) => {
               return (
                 <SelectItem value={option.value} key={option.value}>
-                  <div className="flex items-center">{option.value}</div>
+                  <div className="flex items-center capitalize">{option.value}</div>
                 </SelectItem>
               );
             })}

@@ -120,8 +120,8 @@ export function DataTablePagination<TData>({
                 <AlertDialogHeader>
                   <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                   <AlertDialogDescription>
-                    This action cannot be undone. This will permanently delete your
-                    account and remove your data from our servers.
+                    This action cannot be undone. This will permanently delete this
+                    appointment and remove this data from the servers.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
@@ -134,10 +134,8 @@ export function DataTablePagination<TData>({
             </AlertDialog>
             
           )}
-
-          
-
         </section>
+        
         <div className="flex items-center space-x-2">
           <p className="text-sm font-medium">Rows per page</p>
           <Select

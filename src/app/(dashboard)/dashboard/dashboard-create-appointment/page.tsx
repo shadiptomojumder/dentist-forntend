@@ -124,7 +124,7 @@ const DashboardCreateAppointment = () => {
     };
 
   return (
-    <main className="bg-[#040D12] px-10">
+    <main className="bg-[#040D12] 2xl:px-40 xl:px-20 lg:px-10 md:px-5 px-3">
         <div className="mx-auto space-y-6 bg-[#040D12]">
             <div className="space-y-2 text-center">
             <h1 className="text-3xl text-gray-200 font-bold">
@@ -134,9 +134,9 @@ const DashboardCreateAppointment = () => {
                 Fill out the form below to create an appointment.
             </p>
             </div>
-            <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
-                <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
+            <form className="md:space-y-5 sm:space-y-4 space-y-3" onSubmit={handleSubmit(onSubmit)}>
+                <div className="flex sm:flex-row flex-col items-center gap-4">
+                    <div className="space-y-2 w-full">
                     <Label htmlFor="name" className="text-base">Name <span className="text-red-500">*</span></Label>
                     <Input
                         id="name"
@@ -150,7 +150,7 @@ const DashboardCreateAppointment = () => {
                         </span>
                     )}
                     </div>
-                    <div className="space-y-2">
+                    <div className="space-y-2 w-full">
                     <Label htmlFor="phone" className="text-base">Phone Number <span className="text-red-500">*</span></Label>
                     <Input
                         id="phone"
@@ -338,13 +338,15 @@ const DashboardCreateAppointment = () => {
                     )}
                 </div>
 
-                <Button
-                className="w-full hover:bg-primary gap-2 justify-center font-bold text-black"
-                type="submit"
-                disabled={isPending}
-                >
-                {isPending ? <><Spinner /> Create Appointment</> : "Create Appointment"}
-                </Button>
+                <div className="">
+                    <Button
+                    className="w-full hover:bg-primary gap-2 justify-center font-bold text-black mt-10"
+                    type="submit"
+                    disabled={isPending}
+                    >
+                    {isPending ? <><Spinner /> Create Appointment</> : "Create Appointment"}
+                    </Button>
+                </div>
             </form>
         </div>
     </main>

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Noto_Sans_Bengali } from "next/font/google";
 import React from "react";
-import Sidebar from "./DashboardComponents/Sidebar/Sidebar";
 import Header from "../components/Header/Header";
+import Sidebar from "./UserDashboardComponents/Sidebar/Sidebar";
 
 const NotoBengali = Noto_Sans_Bengali({
   weight: ["400", "500", "700"],

@@ -37,11 +37,16 @@ interface AppointmentData {
 
 const ViewCustomerModal = ({
   appointmentData,
+  onModalClose,
 }: {
   appointmentData: AppointmentData;
+  onModalClose: () => void;
 }) => {
 
   const queryClient = useQueryClient();
+  const handleClose = () => {
+    onModalClose();
+  };
 
 
   const [status, setStatus] = useState<string>("");
@@ -51,11 +56,10 @@ const ViewCustomerModal = ({
       mutationKey: [],
       mutationFn: UpdateAppointment,
       onSuccess: (response) => {
-        console.log("the res is ", response);
-
         if (response.statusCode === 200) {
           toast.success("Status successfully Update");
           queryClient.invalidateQueries({ queryKey: ["appointments"] });
+          onModalClose();
         }
       },
       onError: (error: any) => {
@@ -128,7 +132,7 @@ const ViewCustomerModal = ({
         </DialogHeader>
         <DialogFooter className="gap-4">
           <DialogClose asChild>
-            <Button type="button" variant="secondary">
+            <Button type="button" variant="secondary" onClick={handleClose}>
               Close
             </Button>
           </DialogClose>

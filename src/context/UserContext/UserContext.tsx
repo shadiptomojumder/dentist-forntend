@@ -3,6 +3,7 @@ import React, { createContext, useState, useEffect, ReactNode, FC } from 'react'
 
 // Define the shape of the user object and the context value
 interface User {
+  [x: string]: ReactNode;
   id: string;
   fullname: string;
   email: string;

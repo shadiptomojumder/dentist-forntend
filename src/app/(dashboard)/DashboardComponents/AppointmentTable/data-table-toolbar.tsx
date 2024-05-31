@@ -60,7 +60,7 @@ export function DataTableToolbar<TData>({
     );
 
   return (
-    <div className="flex md:flex-row flex-col gap-3 items-center justify-between">
+    <div className="flex md:flex-row flex-col gap-3 items-center justify-between overflow-x-auto">
       <section className="flex gap-4 items-center md:justify-start justify-between md:w-fit w-full">
         <div className="w-1/2 md:w-fit">
           <Input

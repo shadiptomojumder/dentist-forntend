@@ -304,7 +304,7 @@ const AppointmentPage = () => {
             </div>
 
             <Button
-              className="w-full hover:bg-green-400 gap-2 justify-center font-bold text-black"
+              className="w-full hover:bg-primary gap-2 justify-center font-bold text-black"
               type="submit"
               disabled={isPending}
             >

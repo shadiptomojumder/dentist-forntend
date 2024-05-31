@@ -110,7 +110,6 @@ export const columns: ColumnDef<AppointmentData>[] = [
   {
     id: "status",
     accessorKey: "status",
-
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Status" />
     ),

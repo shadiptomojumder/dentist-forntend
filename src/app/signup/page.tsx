@@ -125,7 +125,7 @@ const Signup = () => {
             )}
           </div>
 
-          <Button className="w-full hover:bg-green-400 gap-2 justify-center text-black font-bold" type="submit" disabled={isPending}>
+          <Button className="w-full hover:bg-primary gap-2 justify-center text-black font-bold" type="submit" disabled={isPending}>
             {
               isPending? <><Spinner/> Sign Up</> : "Sign Up"
             }

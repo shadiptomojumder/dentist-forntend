@@ -16,7 +16,7 @@ export function DataTableViewOptions<TData>({
 }: DataTableViewOptionsProps<TData>) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild className="bg-[#040D12] py-[17px] w-full focus-visible:right-0 focus-visible:bg-green-500">
+      <DropdownMenuTrigger asChild className="bg-[#040D12] py-[17px] w-full focus-visible:ring-0">
         <Button
           variant="outline"
           size="sm"

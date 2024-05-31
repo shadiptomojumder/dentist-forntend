@@ -9,13 +9,8 @@ import { BiArrowToRight } from "react-icons/bi";
 const QuickLinks = [
   {
     id: 1,
-    title: "Dashboard",
-    link: "/dashboard",
-  },
-  {
-    id: 9,
-    title: "Create an appointment",
-    link: "/dashboard/dashboard-create-appointment",
+    title: "Profile",
+    link: "/user-dashboard/user-dashboard-profile",
   },
   {
     id: 3,
@@ -26,11 +21,6 @@ const QuickLinks = [
     id: 4,
     title: "Tests",
     link: "/dashboard/dashboard-tests",
-  },
-  {
-    id: 5,
-    title: "Users",
-    link: "/dashboard/dashboard-users",
   },
 ];
 

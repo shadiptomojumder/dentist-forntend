@@ -1,4 +1,3 @@
-import DeleteAppointment from "@/api/appointment/deleteAppointment";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -7,49 +6,54 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger
 } from "@/components/ui/dropdown-menu";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import ViewCustomerModal from "./ViewCustomerModal";
+import DeleteUser from "@/api/users/deleteUser";
+import { useState } from "react";
 
-interface AppointmentData {
-  // Define the structure of your appointmentData prop here
-  _id: string;
-  name: string;
-  phone: string;
-  address: string;
-  service: string;
-  appointmentDate: string;
-  appointmentTime: string;
-  message: string;
-  status: string;
-  createdBy: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
+interface UsersData {
+  // Define the structure of your UsersData prop here
+  _id: string,
+  fullname: string,
+  email: string,
+  phone: string,
+  role: string,
+  createdAt: string,
+  updatedAt: string,
+  __v: number
 }
 
-const ActionButton = ({ apoointment }: { apoointment: AppointmentData }) => {
-  console.log("apoointment", apoointment);
+const ActionButton = ({ usersData }: { usersData: UsersData }) => {
+  // console.log("apoointment", usersData);
   const queryClient = useQueryClient();
+  const [menuOpen,setMenuOpen] = useState<boolean>(false)
+  console.log("menuOpen is",menuOpen);
+  
+  const handleModalClose = () => {
+    setMenuOpen(false);
+  };
 
   const { mutate, isPending } = useMutation({
     mutationKey: [],
-    mutationFn: DeleteAppointment,
+    mutationFn: DeleteUser,
     onSuccess: (response) => {
-      console.log("the res is ", response);
-
       if (response.statusCode === 200) {
         toast.success("Status successfully Update");
-        queryClient.invalidateQueries({ queryKey: ["appointments"] });
+        queryClient.invalidateQueries({ queryKey: ["users"] });
+        setMenuOpen(false)
       }
     },
     onError: (error: any) => {
-      console.log("The Error Appointment is:", error);
-      if (error?.response?.status == 409) {
+      // console.log("The Error Appointment is:", error);
+      if (error?.response?.status == 404) {
         toast.warning(
-          "There is already an appointment with this name and date."
+          "Something went wrong during an delete"
         );
       } else if (error?.response?.status == 500) {
         toast.error("Something went wrong during an appointment");
@@ -62,19 +66,17 @@ const ActionButton = ({ apoointment }: { apoointment: AppointmentData }) => {
   });
 
   const handleDelete = async () => {
-    console.log("Delete Appointments", apoointment);
-    console.log("Delete button clicked");
-    const appointmentId = apoointment._id;
-    await mutate({ appointmentId });
+    const userId = usersData._id;
+    await mutate({ userId });
   };
 
   return (
     <>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
+      <DropdownMenu onOpenChange={setMenuOpen} open={menuOpen}>
+        <DropdownMenuTrigger asChild onClick={()=>setMenuOpen(!menuOpen)}>
           <Button
             variant="ghost"
-            className="h-8 w-8 p-0 border-none focus-visible:ring-0"
+            className="h-8 w-8 p-0 border-none cursor-pointer focus-visible:ring-0"
           >
             <span className="sr-only">Open menu</span>
             <DotsHorizontalIcon className="h-4 w-4" />
@@ -83,14 +85,14 @@ const ActionButton = ({ apoointment }: { apoointment: AppointmentData }) => {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuItem
-            onClick={() => navigator.clipboard.writeText(apoointment._id)}
+            onClick={() => navigator.clipboard.writeText(usersData._id)}
           >
-            Copy payment ID
+            Copy user ID
           </DropdownMenuItem>
-          {/* <DropdownMenuItem onSelect={(e) => e.preventDefault()}><StatusChangeOption appointmentData={apoointment}/></DropdownMenuItem> */}
           <DropdownMenuSeparator />
+
           <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-            <ViewCustomerModal appointmentData={apoointment} />
+            <ViewCustomerModal onModalClose={handleModalClose} usersData={usersData}/>
           </DropdownMenuItem>
           <DropdownMenuItem>View payment details</DropdownMenuItem>
           <DropdownMenuItem
