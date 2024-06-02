@@ -8,7 +8,7 @@ import React from "react";
 
 const HeroSection = () => {
   const { theme } = useTheme();
-  console.log("The theme is",theme);
+ 
   
   return (
     <section className={`bg-white dark:bg-[#183D3D] ${theme == "light"? "":"dotstyle"} `}>

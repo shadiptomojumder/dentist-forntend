@@ -15,7 +15,7 @@ const QuickLinks = [
   {
     id: 3,
     title: "Appointments",
-    link: "/dashboard/dashboard-appointments",
+    link: "/user-dashboard/user-dashboard-appointments",
   },
   {
     id: 4,
