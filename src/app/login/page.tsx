@@ -56,7 +56,6 @@ const LoginPage = () => {
           "userData",
           JSON.stringify(response.data.loggedInUser)
         );
-        localStorage.setItem("accessToken", JSON.stringify(response.data.accessToken))
         setUser(response.data.loggedInUser);
         router.push("/");
       }

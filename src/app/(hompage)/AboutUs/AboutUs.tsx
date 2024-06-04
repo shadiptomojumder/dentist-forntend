@@ -5,6 +5,8 @@ import Groth_icon from "../../assets/icons/growth.png";
 import Partner_icon from "../../assets/icons/handshake.png";
 import Support_icon from "../../assets/icons/support.png";
 import Service_icon from "../../assets/icons/services0.png";
+import Teeth_icon from "../../assets/icons/teeth3.png";
+import Chair_icon from "../../assets/icons/chair.png";
 
 const AboutUs = () => {
   return (
@@ -28,52 +30,48 @@ const AboutUs = () => {
                 </p>
               </div>
               <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 dark:text-primary sm:text-4xl sm:leading-none">
-                We are Growoly your growth partner.
+                We are Dental Care your smile partner.
               </h2>
               <p className="text-base text-gray-700 dark:text-gray-200 md:text-lg">
-                Welcome to our digital hub! We are more than just a web services
-                agency, we are your go-to partner for comprehensive digital
-                solutions designed to grow your business. We offer experienced
-                company consultation, appealing graphic design, lead generation,
-                effective digital marketing techniques, and SEO services.
+              we offer a comprehensive range of dental services to meet all your oral health needs. From routine cleanings and fillings to advanced procedures like implants and orthodontics, our experienced team is dedicated to providing you with exceptional care and a healthy smile.
               </p>
             </div>
             <div className="grid grid-cols-2 gap-5">
               <div className="flex items-center justify-center gap-3 p-3 bg-[#E1F0DA] dark:bg-[#183D3D] dark:border-primary rounded-lg border border-[#BFD8AF] shadow-md hover:shadow-lg">
                 <Image
-                  src={Groth_icon}
+                  src={Teeth_icon}
                   alt="Groth_icon"
-                  width={30}
-                  height={30}
+                  width={40}
+                  height={40}
                 />
-                <p className="font-semibold"> Grow Business</p>
+                <p className="font-semibold"> White Teeth</p>
               </div>
               <div className="flex items-center justify-center gap-3 p-3 bg-[#E1F0DA] dark:bg-[#183D3D] dark:border-primary rounded-lg border border-[#BFD8AF] shadow-md hover:shadow-lg">
                 <Image
                   src={Partner_icon}
                   alt="Groth_icon"
-                  width={30}
-                  height={30}
+                  width={40}
+                  height={40}
                 />
-                <p className="font-semibold">Trusted Partner</p>
+                <p className="font-semibold">Trusted Doctor</p>
               </div>
               <div className="flex items-center justify-center gap-3 p-3 bg-[#E1F0DA] dark:bg-[#183D3D] dark:border-primary rounded-lg border border-[#BFD8AF] shadow-md hover:shadow-lg">
                 <Image
                   src={Service_icon}
                   alt="Groth_icon"
-                  width={30}
-                  height={30}
+                  width={40}
+                  height={40}
                 />
                 <p className="font-semibold">Excellent Service</p>
               </div>
               <div className="flex items-center justify-center gap-3 p-3 bg-[#E1F0DA] dark:bg-[#183D3D] dark:border-primary rounded-lg border border-[#BFD8AF] shadow-md hover:shadow-lg">
                 <Image
-                  src={Support_icon}
+                  src={Chair_icon}
                   alt="Groth_icon"
-                  width={30}
-                  height={30}
+                  width={40}
+                  height={40}
                 />
-                <p className="font-semibold">24/7 Support</p>
+                <p className="font-semibold">Modern Equpment</p>
               </div>
             </div>
           </div>

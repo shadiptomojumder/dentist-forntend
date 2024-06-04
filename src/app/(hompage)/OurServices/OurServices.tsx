@@ -6,6 +6,10 @@ import Consulting_icon from "../../assets/icons/consulting.png";
 import Marketing_icon from "../../assets/icons/digitalmarketing.png";
 import Graphic_icon from "../../assets/icons/graphic.png";
 import Web_icon from "../../assets/icons/webdev.png";
+import Services1_icon from "../../assets/icons/services1.png";
+import Services2_icon from "../../assets/icons/services3.png";
+import Services3_icon from "../../assets/icons/services3.png";
+import Services4_icon from "../../assets/icons/services4.png";
 
 
 const OurServices = () => {
@@ -24,21 +28,20 @@ const OurServices = () => {
           </h2>
           <p className="text-base text-gray-700 dark:text-gray-200 md:text-lg">
             Discover Our Complete Range of Expert Services to Enhance Your
-            Digital Presence and Achieve Business Success.
+            smile.
           </p>
         </div>
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className={`flex ${theme == "light"? "":"boxglow"}  hover:scale-110 transition-all duration-300 flex-col justify-between p-5 border-2 dark:border border-[#89c661] dark:bg-[#1B4242] rounded-xl shadow-md`}>
             <div>
               <div className="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-indigo-50 p-3">
-                <Image src={Web_icon} alt="Web_icon" height={50} width={50} />
+                <Image src={Services1_icon} alt="Web_icon" height={50} width={50} />
               </div>
               <h6 className="mb-2 font-semibold dark:text-primary leading-5">
-                Web Devlopment
+              General Dentistry
               </h6>
               <p className="mb-3 text-sm text-gray-900 dark:text-gray-200">
-                We specialise in creating custom web solutions to help your
-                business succeed in the digital sphere...
+              This encompasses routine cleanings, exams, fillings, and X-rays, forming the foundation of good oral health.
               </p>
             </div>
             <Link
@@ -53,18 +56,17 @@ const OurServices = () => {
             <div>
               <div className="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-indigo-50 p-3">
                 <Image
-                  src={Graphic_icon}
+                  src={Services2_icon}
                   alt="Web_icon"
                   height={50}
                   width={50}
                 />
               </div>
               <h6 className="mb-2 font-semibold dark:text-primary leading-5">
-                Graphic Design
+              Cosmetic Dentistry
               </h6>
               <p className="mb-3 text-sm text-gray-900 dark:text-gray-200">
-                Growoly &lsquo;s creative arena, where graphic design crosses
-                borders to visually capture and transmit your brands soul...
+              Focuses on improving the appearance of your smile, including procedures like teeth whitening, veneers, and dental implants.
               </p>
             </div>
             <a
@@ -79,18 +81,17 @@ const OurServices = () => {
             <div>
               <div className="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-indigo-50 p-3">
                 <Image
-                  src={Marketing_icon}
+                  src={Services3_icon}
                   alt="Web_icon"
                   height={50}
                   width={50}
                 />
               </div>
               <h6 className="mb-2 font-semibold dark:text-primary leading-5">
-                Digital Marketing
+              Orthodontics
               </h6>
               <p className="mb-3 text-sm text-gray-900 dark:text-gray-200">
-                A flower in my garden, a mystery in my panties. Heart attack
-                never stopped old Big Bear...
+              Deals with straightening teeth and correcting misaligned bites using braces or aligners.
               </p>
             </div>
             <a
@@ -105,18 +106,17 @@ const OurServices = () => {
             <div>
               <div className="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-indigo-50 p-3">
                 <Image
-                  src={Consulting_icon}
+                  src={Services4_icon}
                   alt="Web_icon"
                   height={50}
                   width={50}
                 />
               </div>
               <h6 className="mb-2 font-semibold dark:text-primary leading-5">
-                Buisness Consulting
+              Periodontics
               </h6>
               <p className="mb-3 text-sm text-gray-900 dark:text-gray-200">
-                A flower in my garden, a mystery in my panties. Heart attack
-                never stopped old Big Bear...
+              Specializes in treating gum disease and other conditions affecting the supporting tissues of your teeth.
               </p>
             </div>
             <a
