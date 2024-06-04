@@ -46,6 +46,8 @@ const LoginPage = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: Login,
     onSuccess: (response) => {
+      console.log("response",response);
+      
       if (response.statusCode === 200) {
         toast.success("User successfully Login");
 
@@ -54,6 +56,7 @@ const LoginPage = () => {
           "userData",
           JSON.stringify(response.data.loggedInUser)
         );
+        localStorage.setItem("accessToken", JSON.stringify(response.data.accessToken))
         setUser(response.data.loggedInUser);
         router.push("/");
       }

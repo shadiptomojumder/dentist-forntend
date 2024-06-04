@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import {jwtDecode} from 'jwt-decode';
-import { decode } from 'punycode';
+
 
 
 
@@ -31,7 +31,7 @@ export function middleware(request: NextRequest) {
     const isPublicPath = publicPaths.includes(pathname);
 
     const token = request.cookies.get('accessToken')?.value || ''
-    // console.log("The token in middleware is op:",token);
+    console.log("The token in middleware is op:",token);
 
     const decoded = decodeToken(token);
     console.log("decodeToken",decoded);

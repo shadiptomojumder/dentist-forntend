@@ -53,8 +53,8 @@ const Header = () => {
   const pathname = usePathname();
   const router = useRouter();
   const { user, setUser, userLoading } = useContext(UserContext);
-  console.log("The  userData in header is:", user);
-  console.log("The  userData in header is:", userLoading);
+  // console.log("The  userData in header is:", user);
+  // console.log("The  userData in header is:", userLoading);
 
   // sidebar menu for mobile devices
   const [showSideBar, setShowSideBar] = useState<boolean>(false);
