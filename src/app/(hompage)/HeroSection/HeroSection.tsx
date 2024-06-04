@@ -33,16 +33,15 @@ const HeroSection = () => {
         <div className="relative flex flex-col items-start w-full md:px-0">
           <div className="mb-16 lg:my-40 lg:max-w-lg lg:pr-5">
             <h2 className="mb-5 font-sans text-3xl font-bold tracking-tight text-gray-900 dark:text-primary sm:text-5xl sm:leading-[1.2]">
-              Grow your buissness with our excellence.
+            Healthy Teeth, Happy Life - Comprehensive Dental Care 
             </h2>
             <p className="pr-5 mb-5 text-base text-gray-700 dark:text-gray-200 md:text-lg">
-              At grwoly we have highly qualified expert team for our services. we
-              are ready to make your dream project lives and make significant
-              growth in your business.
+              At Dental care we have highly qualified doctor for our services. we
+              have Complete dental care - From Cleanings to Implants. Painless Dentistry - Relaxing Experience, Exceptional Results. Affordable Dental Care for Every Smile  
             </p>
             <div className="flex items-center">
               <Link href="/appointment">
-                <Button className="bg-[#BFD8AF] text-black dark:hover:text-primary font-semibold hover:bg-transparent hover:border-[#BFD8AF] hover:border hover:shadow-md">
+                <Button className="bg-primary hover:bg-primary text-black font-semibold hover:shadow-md">
                   Book Appointment
                 </Button>
               </Link>
