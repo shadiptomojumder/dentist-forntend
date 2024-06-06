@@ -14,6 +14,7 @@ import { toast } from "sonner";
 import ViewCustomerModal from "./ViewCustomerModal";
 import { useState } from "react";
 import { format } from "date-fns";
+import ViewPaymentModal from "./ViewPaymentModal";
 
 interface AppointmentData {
   // Define the structure of your appointmentData prop here
@@ -104,7 +105,9 @@ const ActionButton = ({ apoointment }: { apoointment: AppointmentData }) => {
           <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
             <ViewCustomerModal  onModalClose={handleModalClose} appointmentData={apoointment} />
           </DropdownMenuItem>
-          <DropdownMenuItem>View payment details</DropdownMenuItem>
+          <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+            <ViewPaymentModal onModalClose={handleModalClose} appointmentData={apoointment} />
+          </DropdownMenuItem>
           {shouldShowDeleteButton && (
             <DropdownMenuItem
               onClick={handleDelete}

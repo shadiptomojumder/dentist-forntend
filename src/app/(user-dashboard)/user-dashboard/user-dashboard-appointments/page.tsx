@@ -13,7 +13,7 @@ const UserDashboardAppointments = () => {
     queryFn: GetUserAppointments,
   });
 
-  console.log("data is",data);
+  // console.log("data is",data);
   
 
   return (

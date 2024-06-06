@@ -22,7 +22,7 @@ const DashboardAppointmentsPage = () => {
       {isLoading ? (
         <AppointmentTableLoading/>
       ) : (
-        <DataTable columns={columns} data={data?.data} />
+        <DataTable columns={columns} data={data?.data || []} />
       )}
     </main>
   );

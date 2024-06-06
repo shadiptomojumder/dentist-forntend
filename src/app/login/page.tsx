@@ -51,7 +51,6 @@ const LoginPage = () => {
       if (response.statusCode === 200) {
         toast.success("User successfully Login");
 
-        reset();
         localStorage.setItem(
           "userData",
           JSON.stringify(response.data.loggedInUser)
