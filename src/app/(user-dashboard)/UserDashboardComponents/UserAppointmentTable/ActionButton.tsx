@@ -8,6 +8,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -15,6 +26,7 @@ import ViewCustomerModal from "./ViewCustomerModal";
 import { useState } from "react";
 import { format } from "date-fns";
 import ViewPaymentModal from "./ViewPaymentModal";
+import Spinner from "@/app/components/Spinner/Spinner";
 
 interface AppointmentData {
   // Define the structure of your appointmentData prop here
@@ -46,6 +58,7 @@ const ActionButton = ({ apoointment }: { apoointment: AppointmentData }) => {
   const today = new Date();
   const appointmentDate = new Date(apoointment.appointmentDate);
   const shouldShowDeleteButton = today < appointmentDate;
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
   
 
   const { mutate, isPending } = useMutation({
@@ -55,8 +68,10 @@ const ActionButton = ({ apoointment }: { apoointment: AppointmentData }) => {
       console.log("the res is ", response);
 
       if (response.statusCode === 200) {
-        toast.success("Status successfully Update");
-        queryClient.invalidateQueries({ queryKey: ["appointments"] });
+        toast.success("Appointment deleted successfully");
+        queryClient.invalidateQueries({ queryKey: ["UserAppointments"] });
+        setMenuOpen(false)
+        setIsDeleteDialogOpen(false)
       }
     },
     onError: (error: any) => {
@@ -109,13 +124,41 @@ const ActionButton = ({ apoointment }: { apoointment: AppointmentData }) => {
             <ViewPaymentModal onModalClose={handleModalClose} appointmentData={apoointment} />
           </DropdownMenuItem>
           {shouldShowDeleteButton && (
-            <DropdownMenuItem
+            <>
+            {/* <DropdownMenuItem
               onClick={handleDelete}
               onSelect={(e) => e.preventDefault()}
               className="text-gray-200 bg-[#6a1c1d] focus:bg-[#782c2c] mt-1"
             >
               Delete
+            </DropdownMenuItem> */}
+            <AlertDialog open={isDeleteDialogOpen}>
+            <AlertDialogTrigger asChild>
+            <DropdownMenuItem
+              onClick={()=>setIsDeleteDialogOpen(true)}
+              onSelect={(e) => e.preventDefault()}
+              className="bg-[#6a1c1d] focus:bg-[#782c2c] text-gray-200 font-bold cursor-pointer"
+            >
+              Delete
             </DropdownMenuItem>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action cannot be undone. This will permanently delete this
+                  appointment and remove this data.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel onClick={()=>setIsDeleteDialogOpen(false)}>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={handleDelete} disabled={isPending} className="hover:bg-primary">
+                  {isPending ? <><Spinner /> Continue</> : "Continue"}
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+          </>
           )}
         </DropdownMenuContent>
       </DropdownMenu>

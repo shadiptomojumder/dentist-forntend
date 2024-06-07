@@ -20,7 +20,7 @@ const QuickLinks = [
   {
     id: 4,
     title: "Tests",
-    link: "/dashboard/dashboard-tests",
+    link: "#",
   },
 ];
 

@@ -231,13 +231,13 @@ const Header = () => {
             );
           })}
 
-          {userLoading ? (
+          {/* {userLoading ? (
             <Skeleton className="w-9 h-9 rounded-md bg-gray-500" />
           ) : (
             <>
               <ThemeToggle></ThemeToggle>
             </>
-          )}
+          )} */}
 
           {user && userLoading === false ? (
             <>

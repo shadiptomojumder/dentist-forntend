@@ -20,7 +20,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarIcon } from "@radix-ui/react-icons";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addDays, format, isAfter, isBefore, startOfToday } from "date-fns";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -86,13 +86,16 @@ const AppointmentPage = () => {
         formState: { errors },
     } = useForm<FormData>({ resolver: zodResolver(formSchema) });
 
+    const queryClient = useQueryClient();
+
     const { mutate , isPending } = useMutation({
         mutationFn: Appointment,
         onSuccess: (response) => {
             if (response.statusCode === 200) {
                 toast.success("Appointment successfully registered");
-            reset();
-            router.push("/");
+                queryClient.invalidateQueries({ queryKey: ["UserAppointments"] });
+                reset();
+                router.push("/");
             }
         },
         onError: (error:any) => {

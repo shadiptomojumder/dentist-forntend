@@ -59,7 +59,7 @@ export function DataTablePagination<TData>({
           table.toggleAllRowsSelected(false);
         });
         toast.success("Two appointment successfully deleted");
-        queryClient.invalidateQueries({ queryKey: ["appointments"] });
+        queryClient.invalidateQueries({ queryKey: ["UserAppointments"] });
         setIsDeleteDialogOpen(false)
       }
     },

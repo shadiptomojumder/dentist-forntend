@@ -34,10 +34,10 @@ export default function RootLayout({
               themes={["dark", "light", "orange"]}
               disableTransitionOnChange
             >
-              <Header></Header>
+              <Header/>
               {children}
               <Toaster richColors/>
-              <Footer></Footer>
+              <Footer/>
             </ThemeProvider>
           </TanstackProvider>
         </UserContextProvider>

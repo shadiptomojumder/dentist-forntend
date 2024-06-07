@@ -45,9 +45,9 @@ export function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL('/login', request.nextUrl))
     }
 
-    if( pathname.startsWith("/dashboard") && decoded && (decoded?.role !== "admin" && decoded?.role !== "super-admin")){
-        return NextResponse.redirect(new URL('/unauthorized', request.url))
-    }
+    // if( pathname.startsWith("/dashboard") && decoded && (decoded?.role !== "admin" && decoded?.role !== "super-admin")){
+    //     return NextResponse.redirect(new URL('/unauthorized', request.url))
+    // }
 
 
     
@@ -59,7 +59,7 @@ export function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-    matcher: ['/login','/signup','/appointment'],
+    matcher: ['/login','/signup'],
 }
 
 // matcher: ['/dashboard/:path*','/user-dashboard/:path*','/login','/signup','/appointment'],
