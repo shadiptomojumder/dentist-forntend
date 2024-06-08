@@ -37,7 +37,7 @@ const AboutUs = () => {
               </p>
             </div>
             <div className="grid grid-cols-2 gap-5">
-              <div className="flex items-center justify-center gap-3 p-3 bg-[#E1F0DA] dark:bg-[#183D3D] dark:border-primary rounded-lg border border-[#BFD8AF] shadow-md hover:shadow-lg">
+              <div className="flex sm:col-span-1 col-span-2 items-center justify-center gap-3 p-3 bg-[#E1F0DA] dark:bg-[#183D3D] dark:border-primary rounded-lg border border-[#BFD8AF] shadow-md hover:shadow-lg">
                 <Image
                   src={Teeth_icon}
                   alt="Groth_icon"
@@ -46,7 +46,7 @@ const AboutUs = () => {
                 />
                 <p className="font-semibold"> White Teeth</p>
               </div>
-              <div className="flex items-center justify-center gap-3 p-3 bg-[#E1F0DA] dark:bg-[#183D3D] dark:border-primary rounded-lg border border-[#BFD8AF] shadow-md hover:shadow-lg">
+              <div className="flex sm:col-span-1 col-span-2 items-center justify-center gap-3 p-3 bg-[#E1F0DA] dark:bg-[#183D3D] dark:border-primary rounded-lg border border-[#BFD8AF] shadow-md hover:shadow-lg">
                 <Image
                   src={Partner_icon}
                   alt="Groth_icon"
@@ -55,7 +55,7 @@ const AboutUs = () => {
                 />
                 <p className="font-semibold">Trusted Doctor</p>
               </div>
-              <div className="flex items-center justify-center gap-3 p-3 bg-[#E1F0DA] dark:bg-[#183D3D] dark:border-primary rounded-lg border border-[#BFD8AF] shadow-md hover:shadow-lg">
+              <div className="flex sm:col-span-1 col-span-2 items-center justify-center gap-3 p-3 bg-[#E1F0DA] dark:bg-[#183D3D] dark:border-primary rounded-lg border border-[#BFD8AF] shadow-md hover:shadow-lg">
                 <Image
                   src={Service_icon}
                   alt="Groth_icon"
@@ -64,7 +64,7 @@ const AboutUs = () => {
                 />
                 <p className="font-semibold">Excellent Service</p>
               </div>
-              <div className="flex items-center justify-center gap-3 p-3 bg-[#E1F0DA] dark:bg-[#183D3D] dark:border-primary rounded-lg border border-[#BFD8AF] shadow-md hover:shadow-lg">
+              <div className="flex sm:col-span-1 col-span-2 items-center justify-center gap-3 p-3 bg-[#E1F0DA] dark:bg-[#183D3D] dark:border-primary rounded-lg border border-[#BFD8AF] shadow-md hover:shadow-lg">
                 <Image
                   src={Chair_icon}
                   alt="Groth_icon"

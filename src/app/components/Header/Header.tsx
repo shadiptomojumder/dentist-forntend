@@ -111,7 +111,7 @@ const Header = () => {
 
   return (
     <nav className="sticky top-0 z-50 bg-[#BFD8AF] dark:bg-[#040D12] dark:bg-opacity-[0.9] dark:backdrop-blur-md shadow-md">
-      <div className="container mx-auto flex md:flex-row flex-col justify-between items-center md:gap-0 py-3">
+      <div className="container mx-auto px-3 flex md:flex-row flex-col justify-between items-center md:gap-0 py-3">
         <div className="flex items-center justify-between md:w-auto w-full">
           <Link href="/">
             {userLoading ? (
@@ -191,9 +191,9 @@ const Header = () => {
                     <Link href="/login">
                       <Button
                         variant="default"
-                        className="text-lg bg-[#040D12] boxglow border-2 border-primary text-white px-5 py-6 font-semibold rounded-full"
+                        className="text-lg bg-[#040D12] boxglow border-2 border-primary text-white px-2 md:px-5 py-5 md:py-6 font-semibold rounded-full"
                       >
-                        Loginop
+                        Login
                       </Button>
                     </Link>
                   )}
@@ -373,9 +373,9 @@ const Header = () => {
           }`}
         >
           {/* All the Links */}
-          <div onClick={() => setShowSideBar(false)} className="">
+          {/* <div onClick={() => setShowSideBar(false)} className="">
             <Button className="hover:bg-primary w-full">Close</Button>
-          </div>
+          </div> */}
 
           {userLoading ? (
             <section className="space-y-5">

@@ -124,10 +124,10 @@ const AppointmentPage = () => {
     };
 
   return (
-    <main className="bg-[#092635] py-14 lg:py-20 dotstyle">
+    <main className="bg-[#092635] mx-auto container py-14 lg:py-20 dotstyle">
         <div className="mx-auto max-w-lg space-y-6 bg-[#1B4242] rounded-xl p-8 border border-primary boxglow">
             <div className="space-y-2 text-center">
-            <h1 className="text-3xl text-gray-200 font-bold">
+            <h1 className="md:text-3xl text-2xl text-gray-200 font-bold">
                 Schedule Your Dental Appointment
             </h1>
             <p className="text-gray-500 dark:text-gray-400">
@@ -136,7 +136,7 @@ const AppointmentPage = () => {
             </div>
             <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
             <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
+                <div className="space-y-2 md:col-span-1 col-span-2">
                 <Label htmlFor="name" className="text-base">Name <span className="text-red-500">*</span></Label>
                 <Input
                     id="name"
@@ -150,7 +150,7 @@ const AppointmentPage = () => {
                     </span>
                 )}
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-2 md:col-span-1 col-span-2">
                 <Label htmlFor="phone" className="text-base">Phone Number <span className="text-red-500">*</span></Label>
                 <Input
                     id="phone"

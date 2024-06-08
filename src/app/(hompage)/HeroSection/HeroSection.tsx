@@ -32,14 +32,14 @@ const HeroSection = () => {
         </div>
         <div className="relative flex flex-col items-start w-full md:px-0">
           <div className="mb-16 lg:my-40 lg:max-w-lg lg:pr-5">
-            <h2 className="mb-5 font-sans text-3xl font-bold tracking-tight text-gray-900 dark:text-primary sm:text-5xl sm:leading-[1.2]">
+            <h2 className="mb-5 font-sans sm:text-5xl font-bold tracking-tight text-gray-900 dark:text-primary text-3xl sm:text-start text-center sm:leading-[1.2]">
             Healthy Teeth, Happy Life - Comprehensive Dental Care 
             </h2>
-            <p className="pr-5 mb-5 text-base text-gray-700 dark:text-gray-200 md:text-lg">
+            <p className="pr-5 mb-5 text-base text-gray-700 dark:text-gray-200 md:text-lg sm:text-start text-center">
               At Dental care we have highly qualified doctor for our services. we
               have Complete dental care - From Cleanings to Implants. Painless Dentistry - Relaxing Experience, Exceptional Results. Affordable Dental Care for Every Smile  
             </p>
-            <div className="flex items-center">
+            <div className="flex items-center md:justify-start justify-center">
               <Link href="/appointment">
                 <Button className="bg-primary hover:bg-primary text-black font-semibold hover:shadow-md">
                   Book Appointment
