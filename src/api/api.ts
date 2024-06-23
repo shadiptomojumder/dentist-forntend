@@ -1,11 +1,12 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: `https://dentist-backend-one.vercel.app/api`,
+  baseURL: `https://dentist-backend-phee.onrender.com/api`,
   timeout: 10000,
   headers: {'X-Custom-Header': 'foobar'},
   withCredentials: true
 });
 
 // https://dentist-backend-phee.onrender.com
-// https://dentist-backend-one.vercel.app/
+// https://dentist-backend-one.vercel.app
+// http://localhost:5000
