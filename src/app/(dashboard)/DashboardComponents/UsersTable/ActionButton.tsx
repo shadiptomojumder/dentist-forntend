@@ -33,7 +33,7 @@ const ActionButton = ({ usersData }: { usersData: UsersData }) => {
   // console.log("apoointment", usersData);
   const queryClient = useQueryClient();
   const [menuOpen,setMenuOpen] = useState<boolean>(false)
-  console.log("menuOpen is",menuOpen);
+  // console.log("menuOpen is",menuOpen);
   
   const handleModalClose = () => {
     setMenuOpen(false);

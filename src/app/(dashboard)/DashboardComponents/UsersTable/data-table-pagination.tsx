@@ -39,14 +39,14 @@ export function DataTablePagination<TData>({
   table,
 }: DataTablePaginationProps<TData>) {
   const selectedRows = table.getFilteredSelectedRowModel().rows;
-  console.log("selected rows: ", selectedRows);
+  // console.log("selected rows: ", selectedRows);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
   const selectedAppointmentIds = selectedRows.map((appointment: any) => {
     const appointmentId = appointment?.original._id;
     return appointmentId;
   });
 
-  console.log("selectedAppointmentIds", selectedAppointmentIds);
+  // console.log("selectedAppointmentIds", selectedAppointmentIds);
   const queryClient = useQueryClient();
   const { mutate, isPending } = useMutation({
     mutationKey: [],

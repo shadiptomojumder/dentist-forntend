@@ -120,7 +120,7 @@ export const columns: ColumnDef<UsersData>[] = [
     enableHiding: false,
     cell: ({ row }) => {
       const usersData = row.original;
-      console.log("usersData", usersData);
+      // console.log("usersData", usersData);
 
       return <ActionButton usersData={usersData} />;
     },

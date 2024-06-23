@@ -26,12 +26,14 @@ interface DecodedToken {
 
 export function middleware(request: NextRequest) {
     const pathname = request.nextUrl.pathname;
+    console.log("The request in middleware line 29:",request);
+
 
     const publicPaths = ['/login', '/signup']; // Array of public paths
     const isPublicPath = publicPaths.includes(pathname);
 
     const token = request.cookies.get('accessToken')?.value || ''
-    console.log("The token in middleware is op:",token);
+    console.log("The token in middleware line 34:",token);
 
     const decoded = decodeToken(token);
     console.log("decodeToken",decoded);
@@ -59,7 +61,7 @@ export function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-    matcher: ['/login','/signup'],
+    matcher: ['/login','/signup','/appointment'],
 }
 
 // matcher: ['/dashboard/:path*','/user-dashboard/:path*','/login','/signup','/appointment'],

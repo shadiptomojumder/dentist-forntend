@@ -63,7 +63,7 @@ const Header = () => {
   const handleClickOutside = (event: any) => {
     if (sideBarRef.current && !sideBarRef.current.contains(event.target)) {
       // Do something when clicking outside of authDropdownRef
-      console.log("Clicked outside!");
+      // console.log("Clicked outside!");
       setShowSideBar(false);
     }
   };

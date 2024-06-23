@@ -145,7 +145,7 @@ export const columns: ColumnDef<AppointmentData>[] = [
     enableHiding: false,
     cell: ({ row }) => {
       const apoointment = row.original;
-      console.log("Apointment", apoointment);
+      // console.log("Apointment", apoointment);
       
       return (
         <ActionButton apoointment={apoointment}/>
