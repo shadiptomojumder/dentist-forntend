@@ -32,7 +32,7 @@ export function middleware(request: NextRequest) {
     // console.log("decodeToken",decoded);
     
     if(isPublicPath && token) {
-        return NextResponse.redirect(new URL('/', request.url))
+        return NextResponse.redirect(new URL('/', request.nextUrl))
     }
     
     if (!isPublicPath && !token) {

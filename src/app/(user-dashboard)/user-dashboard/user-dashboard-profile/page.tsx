@@ -40,6 +40,9 @@ const UserDashboardProfile = () => {
   const router = useRouter();
   const { user, setUser, userLoading } = useContext(UserContext);
   // console.log("The user is:", user);
+  
+  const [isTouched, setIsTouched] = useState<boolean>(false);
+  // console.log("isTouched :",isTouched);
 
   const [previewImage, setPreviewImage] = useState<string | null>(null);
 
@@ -73,13 +76,9 @@ const UserDashboardProfile = () => {
     register,
     setValue,
     handleSubmit,
-    getFieldState,
-    formState: { errors , isDirty , touchedFields ,dirtyFields,isSubmitting},
+    formState: { errors },
     reset,
-    watch
   } = useForm<FormData>({ resolver: zodResolver(formSchema) });
-
-  const watchFields = watch(["fullname", "email", "phone"])
 
   const { mutate, isPending } = useMutation({
     mutationFn: UpdateUser,
@@ -93,7 +92,8 @@ const UserDashboardProfile = () => {
             "userData",
             JSON.stringify(response.data)
           );
-          setUser(response.data);
+        setUser(response.data);
+        setIsTouched(false)
       }
     },
     onError: (error: any) => {
@@ -129,8 +129,6 @@ const UserDashboardProfile = () => {
       }
   };
 
-  const [isTouched, setIsTouched] = useState<boolean>(false);
-  // console.log("isTouched :",isTouched);
   
 
   useEffect(() => {
@@ -160,8 +158,8 @@ const UserDashboardProfile = () => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="">
-            <p className="pb-3">Profile Picture</p>
-            <Label htmlFor="avatar" className="h-full w-fit">
+            <p className="pb-3 text-center sm:text-start">Profile Picture</p>
+            <Label htmlFor="avatar" className="flex justify-center sm:justify-start">
               {previewImage ? (
                 <Image
                   src={previewImage}
@@ -264,6 +262,7 @@ const UserDashboardProfile = () => {
                 placeholder="Enter your full name"
                 type="text"
                 onChange={()=>setIsTouched(true)}
+                className="focus:border-primary h-11"
               />
             </div>
             {errors.fullname && (
@@ -275,7 +274,7 @@ const UserDashboardProfile = () => {
 
           <div>
             <div className="space-y-2">
-              <Label htmlFor="email">Email *</Label>
+              <Label htmlFor="email">Email</Label>
               <Input
                 {...register("email")}
                 id="email"
@@ -283,6 +282,7 @@ const UserDashboardProfile = () => {
                 placeholder="Enter your email address"
                 type="email"
                 onChange={()=>setIsTouched(true)}
+                className="focus:border-primary h-11"
               />
             </div>
             {errors.email && (
@@ -302,6 +302,7 @@ const UserDashboardProfile = () => {
                 placeholder="Enter your phone number"
                 type="number"
                 onChange={()=>setIsTouched(true)}
+                className="focus:border-primary h-11"
               />
             </div>
             {errors.phone && (

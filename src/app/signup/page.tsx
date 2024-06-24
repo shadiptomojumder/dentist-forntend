@@ -74,12 +74,13 @@ const Signup = () => {
         <form target="" className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
           <div>
             <div className="space-y-2">
-              <Label htmlFor="fullname">Full Name *</Label>
+              <Label htmlFor="fullname">Full Name <span className="text-red-600">*</span></Label>
               <Input
                 {...register("fullname")}
                 id="fullname"
                 name="fullname"
                 placeholder="Enter your full name"
+                className="focus:border-primary h-11"
               />
             </div>
             {errors.fullname && (
@@ -91,13 +92,14 @@ const Signup = () => {
 
           <div>
             <div className="space-y-2">
-              <Label htmlFor="email">Email *</Label>
+              <Label htmlFor="email">Email <span className="text-red-600">*</span></Label>
               <Input
                 {...register("email")}
                 id="email"
                 name="email"
                 placeholder="Enter your email address"
                 type="email"
+                className="focus:border-primary h-11"
               />
             </div>
             {errors.email && (
@@ -109,13 +111,14 @@ const Signup = () => {
 
           <div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password *</Label>
+              <Label htmlFor="password">Password <span className="text-red-600">*</span></Label>
               <Input
                 {...register("password")}
                 id="password"
                 name="password"
                 placeholder="Enter your password"
                 type="password"
+                className="focus:border-primary h-11"
               />
             </div>
             {errors.password && (

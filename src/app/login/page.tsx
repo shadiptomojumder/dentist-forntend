@@ -89,12 +89,13 @@ const LoginPage = () => {
           <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
             <div>
               <div className="space-y-2">
-                <Label htmlFor="email-username">Email</Label>
+                <Label htmlFor="email-username">Email <span className="text-red-600">*</span></Label>
                 <Input
                   id="email-username"
                   placeholder="Enter your email"
                   {...register("email")}
                   type="text"
+                  className="focus:border-primary h-11"
                 />
               </div>
               {errors.email && (
@@ -107,7 +108,7 @@ const LoginPage = () => {
             <div>
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password">Password <span className="text-red-600">*</span></Label>
                   <Link className="text-sm underline" href="/forgot-password">
                     Forgot Password?
                   </Link>
@@ -117,6 +118,7 @@ const LoginPage = () => {
                   placeholder="Enter your password"
                   {...register("password")}
                   type="password"
+                  className="focus:border-primary h-11"
                 />
               </div>
               {errors.password && (
