@@ -2,9 +2,6 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import {jwtDecode} from 'jwt-decode';
 
-
-
-
 interface DecodedToken {
     _id: string;
     fullname: string;
@@ -22,12 +19,8 @@ interface DecodedToken {
     }
 };
 
-
-
 export function middleware(request: NextRequest) {
     const pathname = request.nextUrl.pathname;
-    console.log("The request in middleware line 29:",request);
-
 
     const publicPaths = ['/login', '/signup']; // Array of public paths
     const isPublicPath = publicPaths.includes(pathname);
@@ -35,10 +28,9 @@ export function middleware(request: NextRequest) {
     const token = request.cookies.get('accessToken')?.value || ''
     console.log("The token in middleware line 34:",token);
 
-    const decoded = decodeToken(token);
-    console.log("decodeToken",decoded);
+    // const decoded = decodeToken(token);
+    // console.log("decodeToken",decoded);
     
-
     if(isPublicPath && token) {
         return NextResponse.redirect(new URL('/', request.url))
     }
@@ -47,21 +39,13 @@ export function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL('/login', request.nextUrl))
     }
 
-    // if( pathname.startsWith("/dashboard") && decoded && (decoded?.role !== "admin" && decoded?.role !== "super-admin")){
-    //     return NextResponse.redirect(new URL('/unauthorized', request.url))
-    // }
-
-
-    
-
     // Otherwise, allow the request to proceed
     return NextResponse.next()
-    
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-    matcher: ['/login','/signup','/appointment'],
+    matcher: ['/login','/signup'],
 }
 
 // matcher: ['/dashboard/:path*','/user-dashboard/:path*','/login','/signup','/appointment'],

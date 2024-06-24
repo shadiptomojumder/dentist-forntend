@@ -124,8 +124,8 @@ const AppointmentPage = () => {
     };
 
   return (
-    <main className="bg-[#092635] mx-auto container py-14 lg:py-20 dotstyle">
-        <div className="mx-auto max-w-lg space-y-6 bg-[#1B4242] rounded-xl p-8 border border-primary boxglow">
+    <main className="bg-[#092635] mx-auto py-14 lg:py-20 px-3 dotstyle">
+        <div className="mx-auto xl:max-w-2xl md:max-w-lg max-w-fit space-y-6 bg-[#1B4242] rounded-xl md:p-8 px-4 py-8 border border-primary boxglow">
             <div className="space-y-2 text-center">
             <h1 className="md:text-3xl text-2xl text-gray-200 font-bold">
                 Schedule Your Dental Appointment

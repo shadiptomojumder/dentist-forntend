@@ -39,7 +39,7 @@ type FormData = z.infer<typeof formSchema>;
 const UserDashboardProfile = () => {
   const router = useRouter();
   const { user, setUser, userLoading } = useContext(UserContext);
-  console.log("The user is:", user);
+  // console.log("The user is:", user);
 
   const [previewImage, setPreviewImage] = useState<string | null>(null);
 
@@ -52,29 +52,34 @@ const UserDashboardProfile = () => {
         if (e.target) {
             setAvatarBase64(reader.result as string);
             setPreviewImage(e.target.result as string);
+            setIsTouched(true)
           }
     };
     reader.readAsDataURL(file);
   };
 
-  const handleImageChange = (event: any) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      if (e.target) {
-        setPreviewImage(e.target.result as string);
-      }
-    };
-    reader.readAsDataURL(file);
-  };
+  // const handleImageChange = (event: any) => {
+  //   const file = event.target.files[0];
+  //   const reader = new FileReader();
+  //   reader.onload = (e) => {
+  //     if (e.target) {
+  //       setPreviewImage(e.target.result as string);
+  //     }
+  //   };
+  //   reader.readAsDataURL(file);
+  // };
 
   const {
     register,
     setValue,
     handleSubmit,
-    formState: { errors },
+    getFieldState,
+    formState: { errors , isDirty , touchedFields ,dirtyFields,isSubmitting},
     reset,
+    watch
   } = useForm<FormData>({ resolver: zodResolver(formSchema) });
+
+  const watchFields = watch(["fullname", "email", "phone"])
 
   const { mutate, isPending } = useMutation({
     mutationFn: UpdateUser,
@@ -103,25 +108,30 @@ const UserDashboardProfile = () => {
   });
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-
-
-    const newData = {
-        ...data,
-        avatar: avatarBase64,
-      }
+    console.log("The old data is:", data);
+    console.log("The avatarBase64 is:", avatarBase64);
+     // Create a copy of the data object
+     const newData = { ...data };
+    
+     // Conditionally add the avatar property if avatarBase64 is not an empty string
+     if (!avatarBase64 === undefined || "") {
+         newData.avatar = avatarBase64;
+     } else {
+      // Remove avatar field if avatarBase64 is empty string
+      delete newData.avatar;
+  }
       console.log("The new data is:", newData);
       
-
-    const userId = user?._id;
     if (user && user._id) {
-        const userId = user._id;
         await mutate({ data: newData, userId: user._id?.toString() });
       } else {
         console.error("User or user ID is not defined");
       }
-    
-    // await mutate({ data: data, userId });
   };
+
+  const [isTouched, setIsTouched] = useState<boolean>(false);
+  // console.log("isTouched :",isTouched);
+  
 
   useEffect(() => {
     if (user) {
@@ -252,6 +262,8 @@ const UserDashboardProfile = () => {
                 id="fullname"
                 name="fullname"
                 placeholder="Enter your full name"
+                type="text"
+                onChange={()=>setIsTouched(true)}
               />
             </div>
             {errors.fullname && (
@@ -270,6 +282,7 @@ const UserDashboardProfile = () => {
                 name="email"
                 placeholder="Enter your email address"
                 type="email"
+                onChange={()=>setIsTouched(true)}
               />
             </div>
             {errors.email && (
@@ -287,7 +300,8 @@ const UserDashboardProfile = () => {
                 id="phone"
                 name="phone"
                 placeholder="Enter your phone number"
-                type="text"
+                type="number"
+                onChange={()=>setIsTouched(true)}
               />
             </div>
             {errors.phone && (
@@ -300,7 +314,7 @@ const UserDashboardProfile = () => {
           <Button
             className="w-full hover:bg-primary gap-2 justify-center text-black font-bold"
             type="submit"
-            disabled={isPending}
+            disabled={isPending || !isTouched}
           >
             {isPending ? (
               <>
