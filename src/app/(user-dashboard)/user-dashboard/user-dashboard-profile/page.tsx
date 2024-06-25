@@ -15,9 +15,6 @@ import { FieldError, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-
-
-
 const formSchema = z.object({
   fullname: z.string().min(2, {
     message: "Fullname must be at least 2 characters.",
@@ -31,7 +28,7 @@ const formSchema = z.object({
     .refine((phone) => /^01[3-9]\d{8}$/.test(phone), {
       message: "Please enter a valid phone number",
     }),
-    avatar: z.any().optional(),
+  avatar: z.any().optional(),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -40,23 +37,23 @@ const UserDashboardProfile = () => {
   const router = useRouter();
   const { user, setUser, userLoading } = useContext(UserContext);
   // console.log("The user is:", user);
-  
+
   const [isTouched, setIsTouched] = useState<boolean>(false);
   // console.log("isTouched :",isTouched);
 
   const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   const [avatarBase64, setAvatarBase64] = useState("");
-   // Function to handle logo change
-   const handleAvatarImageChange = (event:any) => {
+  // Function to handle logo change
+  const handleAvatarImageChange = (event: any) => {
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.onloadend = (e) => {
-        if (e.target) {
-            setAvatarBase64(reader.result as string);
-            setPreviewImage(e.target.result as string);
-            setIsTouched(true)
-          }
+      if (e.target) {
+        setAvatarBase64(reader.result as string);
+        setPreviewImage(e.target.result as string);
+        setIsTouched(true);
+      }
     };
     reader.readAsDataURL(file);
   };
@@ -83,17 +80,14 @@ const UserDashboardProfile = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: UpdateUser,
     onSuccess: (response) => {
-        console.log("response is",response);
-        
+      console.log("response is", response);
+
       if (response.statusCode === 200) {
         toast.success("User successfully updated");
-        setPreviewImage(response.data.avatar)
-        localStorage.setItem(
-            "userData",
-            JSON.stringify(response.data)
-          );
+        setPreviewImage(response.data.avatar);
+        localStorage.setItem("userData", JSON.stringify(response.data));
         setUser(response.data);
-        setIsTouched(false)
+        setIsTouched(false);
       }
     },
     onError: (error: any) => {
@@ -110,26 +104,26 @@ const UserDashboardProfile = () => {
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     console.log("The old data is:", data);
     console.log("The avatarBase64 is:", avatarBase64);
-     // Create a copy of the data object
-     const newData = { ...data };
-    
-     // Conditionally add the avatar property if avatarBase64 is not an empty string
-     if (!avatarBase64 === undefined || "") {
-         newData.avatar = avatarBase64;
-     } else {
-      // Remove avatar field if avatarBase64 is empty string
-      delete newData.avatar;
-  }
-      console.log("The new data is:", newData);
-      
-    if (user && user._id) {
-        await mutate({ data: newData, userId: user._id?.toString() });
-      } else {
-        console.error("User or user ID is not defined");
-      }
-  };
+    // Create a copy of the data object
+    const newData = { ...data };
 
-  
+    // Conditionally add the avatar property if avatarBase64 is not an empty string
+    if (avatarBase64 !== undefined && avatarBase64 !== "") {
+      newData.avatar = avatarBase64;
+      console.log("Come here!");
+    } else {
+      // Remove avatar field if avatarBase64 is empty string
+      console.log("Come here! 123");
+      delete newData.avatar;
+    }
+    console.log("The new data is:", newData);
+
+    if (user && user._id) {
+      await mutate({ data: newData, userId: user._id?.toString() });
+    } else {
+      console.error("User or user ID is not defined");
+    }
+  };
 
   useEffect(() => {
     if (user) {
@@ -139,11 +133,11 @@ const UserDashboardProfile = () => {
         setValue("phone", user?.phone?.toString());
       }
       if (user?.avatar) {
-        setPreviewImage(user?.avatar as string)
+        setPreviewImage(user?.avatar as string);
       }
       // ... other fields
     }
-  }, [user,setValue]);
+  }, [user, setValue]);
 
   return (
     <main>
@@ -153,13 +147,13 @@ const UserDashboardProfile = () => {
       </p>
       <Separator className="my-4" />
       <section>
-        <form
-          className="space-y-10"
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <form className="space-y-10" onSubmit={handleSubmit(onSubmit)}>
           <div className="">
             <p className="pb-3 text-center sm:text-start">Profile Picture</p>
-            <Label htmlFor="avatar" className="flex justify-center sm:justify-start">
+            <Label
+              htmlFor="avatar"
+              className="flex justify-center sm:justify-start"
+            >
               {previewImage ? (
                 <Image
                   src={previewImage}
@@ -261,7 +255,7 @@ const UserDashboardProfile = () => {
                 name="fullname"
                 placeholder="Enter your full name"
                 type="text"
-                onChange={()=>setIsTouched(true)}
+                onChange={() => setIsTouched(true)}
                 className="focus:border-primary h-11"
               />
             </div>
@@ -281,7 +275,7 @@ const UserDashboardProfile = () => {
                 name="email"
                 placeholder="Enter your email address"
                 type="email"
-                onChange={()=>setIsTouched(true)}
+                onChange={() => setIsTouched(true)}
                 className="focus:border-primary h-11"
               />
             </div>
@@ -301,7 +295,7 @@ const UserDashboardProfile = () => {
                 name="phone"
                 placeholder="Enter your phone number"
                 type="number"
-                onChange={()=>setIsTouched(true)}
+                onChange={() => setIsTouched(true)}
                 className="focus:border-primary h-11"
               />
             </div>

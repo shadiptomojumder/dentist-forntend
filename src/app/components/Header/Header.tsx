@@ -1,6 +1,5 @@
 "use client";
 import Logout from "@/api/user/logout";
-import { ThemeToggle } from "@/components/themeProvider/theme-toggle";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -16,8 +15,8 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useContext, useEffect, useRef, useState } from "react";
 import { FaUser } from "react-icons/fa";
-import { FaBars } from "react-icons/fa6";
 import { toast } from "sonner";
+import MenuBar from "../MenuBar/MenuBar";
 
 const NavLinks = [
   {
@@ -55,6 +54,7 @@ const Header = () => {
   const { user, setUser, userLoading } = useContext(UserContext);
   // console.log("The  userData in header is:", user);
   // console.log("The  userData in header is:", userLoading);
+  // console.log("The  menuOpen in header file:", menuOpen);
 
   // sidebar menu for mobile devices
   const [showSideBar, setShowSideBar] = useState<boolean>(false);
@@ -77,7 +77,7 @@ const Header = () => {
 
   // Here logic of when menu is open the scrollbar willbe disable
   useEffect(() => {
-    if (showSideBar) {
+    if (menuOpen) {
       document.body.style.overflowY = "hidden";
     } else {
       document.body.style.overflowY = "scroll";
@@ -85,7 +85,7 @@ const Header = () => {
     return () => {
       document.body.style.overflowY = "scroll";
     };
-  }, [showSideBar]);
+  }, [menuOpen]);
 
   // Logout Function
   const handleLogout = async () => {
@@ -105,13 +105,9 @@ const Header = () => {
     }
   };
 
-  // if(userLoading){
-  //   return <p>Loading....</p>
-  // }
-
   return (
-    <nav className="sticky top-0 z-50 bg-[#BFD8AF] dark:bg-[#040D12] dark:bg-opacity-[0.9] dark:backdrop-blur-md shadow-md">
-      <div className="container mx-auto px-3 flex md:flex-row flex-col justify-between items-center md:gap-0 py-3">
+    <nav className="sticky top-0 z-[500] bg-[#BFD8AF] dark:bg-[#040D12] dark:bg-opacity-[0.9] dark:backdrop-blur-md shadow-md">
+      <div className="container bg-[#040D12] relative mx-auto px-3 flex md:flex-row flex-col justify-between items-center md:gap-0 py-3">
         <div className="flex items-center justify-between md:w-auto w-full">
           <Link href="/">
             {userLoading ? (
@@ -123,9 +119,9 @@ const Header = () => {
             )}
           </Link>
           <section className="flex items-center gap-4">
-            <button onClick={() => setShowSideBar(true)} className="md:hidden">
-              <FaBars className="text-2xl text-primary" />
-            </button>
+            <div className="md:hidden">
+              <MenuBar key={1} setopen={setMenuOpen} open={menuOpen}></MenuBar>
+            </div>
             <div className="md:hidden">
               {user && userLoading === false ? (
                 <>
@@ -150,7 +146,7 @@ const Header = () => {
                           </div>
                         )}
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
+                      <DropdownMenuContent align="end" className="z-[500]">
                         <DropdownMenuItem className="py-1">
                           {user?.fullname}
                         </DropdownMenuItem>
@@ -171,7 +167,7 @@ const Header = () => {
                               </DropdownMenuItem>
                             </Link>
                           )}
-                        <Link href="/dashboard/dashboard-appointments">
+                        <Link href="/user-dashboard/user-dashboard-appointments">
                           <DropdownMenuItem>Appointment</DropdownMenuItem>
                         </Link>
 
@@ -186,7 +182,7 @@ const Header = () => {
               ) : (
                 <>
                   {userLoading ? (
-                    <Skeleton className="w-[87px] h-[50px] rounded-full bg-gray-500 z-50" />
+                    <Skeleton className="md:w-[87px] w-[50px] h-[50px] rounded-full bg-gray-500 z-50" />
                   ) : (
                     <Link href="/login">
                       <Button
@@ -281,7 +277,7 @@ const Header = () => {
                           <DropdownMenuItem>Admin Dashboard</DropdownMenuItem>
                         </Link>
                       )}
-                    <Link href="/dashboard/dashboard-appointments">
+                    <Link href="/user-dashboard/user-dashboard-appointments">
                       <DropdownMenuItem>Appointment</DropdownMenuItem>
                     </Link>
 
@@ -312,130 +308,52 @@ const Header = () => {
         </div>
 
         {/* This is for mobile devices */}
-        {/* <AnimatePresence>
-          {menuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="flex flex-col md:hidden gap-5 items-center md:pt-0 pt-5 h-screen">
-                <Link href={"/"}>
-                  <Button
-                    variant={"ghost"}
-                    className="font-bold text-base text-primary"
-                  >
-                    Home
-                  </Button>
-                </Link>
-                <Link href={"/"}>
-                  <Button
-                    variant={"ghost"}
-                    className="font-bold text-base text-primary"
-                  >
-                    About
-                  </Button>
-                </Link>
-                <Link href={"/"}>
-                  <Button
-                    variant={"ghost"}
-                    className="font-bold text-base text-primary"
-                  >
-                    Team
-                  </Button>
-                </Link>
-                <Link href={"/"}>
-                  <Button
-                    variant={"ghost"}
-                    className="font-bold text-base text-primary"
-                  >
-                    Contact
-                  </Button>
-                </Link>
-                <Link href={"/"}>
-                  <Button
-                    variant={"ghost"}
-                    className="font-bold text-base text-primary"
-                  >
-                    Contact us
-                  </Button>
-                </Link>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence> */}
-
-        <main
-          ref={sideBarRef}
-          className={`px-6 py-10 transition-all duration-300 lg:hidden md:min-w-[288px] min-w-[150px] flex flex-col justify-between h-dvh z-[500] fixed bg-[#040D12] border-r-2 border-t-2 rounded-tr-2xl border-primary ${
-            showSideBar ? "top-0 left-0" : "top-0 -left-[95%]"
-          }`}
-        >
-          {/* All the Links */}
-          {/* <div onClick={() => setShowSideBar(false)} className="">
-            <Button className="hover:bg-primary w-full">Close</Button>
-          </div> */}
-
-          {userLoading ? (
-            <section className="space-y-5">
-              {Array.from({ length: 6 }, (_, index) => (
-                <Skeleton
-                  key={index}
-                  className="w-full h-[32px] rounded-md bg-gray-500"
-                />
-              ))}
-            </section>
-          ) : (
-            <>
-              <section className="space-y-5">
-                {NavLinks.map((item) => {
-                  const isActive = pathname === item.link;
-                  return (
-                    <Link
-                      onClick={() => setShowSideBar(false)}
-                      href={`${item.link}`}
-                      key={item.id}
-                      className="block"
-                    >
-                      <div
-                        className={
-                          isActive
-                            ? "py-2 px-4 cursor-pointer bg-[#092635] border border-primary boxglow rounded-md transition-all ease-in-out duration-300"
-                            : "py-2 px-4 cursor-pointer bg-transparent hover:bg-[#092635] border border-gray-200 rounded-md hover:border-primary hover:text-primary transition-all ease-in-out duration-300"
-                        }
-                      >
-                        <h2
-                          className={
-                            isActive
-                              ? "text-primary font-semibold transition-all ease-in-out duration-300"
-                              : "text-gray-200 font-semibold transition-all ease-in-out duration-300"
-                          }
-                        >
-                          {item.name}
-                        </h2>
-                      </div>
-                    </Link>
-                  );
-                })}
-              </section>
-            </>
-          )}
-
-          {/* sidebar close button */}
-          <div onClick={() => setShowSideBar(false)} className="">
-            <Button className="hover:bg-primary w-full">Close</Button>
-          </div>
-        </main>
 
         <div
-          className={`w-dvw h-dvh lg:hidden transition-all duration-200 z-[400] backdrop-blur-lg bg-black bg-opacity-90 fixed left-0 top-0 ${
-            showSideBar ? "translate-x-[0%]" : "-translate-x-[110%]"
+          className={`w-dvw h-dvh lg:hidden transition-all duration-500 -z-[100] backdrop-blur-md bg-black bg-opacity-90 absolute top-[100%] left-0 ${
+            menuOpen
+              ? "translate-y-0 opacity-100 skew-y-12"
+              : "-translate-y-full opacity-0"
           }`}
         ></div>
-        {/* <div
-          className={`w-dvw h-dvh lg:hidden transition-all duration-200 z-[400] backdrop-blur-md bg-black bg-opacity-90 fixed left-0 top-0`}
-        ></div> */}
+
+        <div
+          className={`-z-[40] bg-gray-900 w-full py-20 absolute top-[100%] left-0 duration-500 ${
+            menuOpen ? "translate-y-0 scale-100" : "-translate-y-full scale-50 "
+          }`}
+        >
+          <section className="space-y-3">
+            {NavLinks.map((item) => {
+              const isActive = pathname === item.link;
+              return (
+                <Link
+                  onClick={() => setMenuOpen(false)}
+                  href={`${item.link}`}
+                  key={item.id}
+                  className="block"
+                >
+                  <div
+                    className={
+                      isActive
+                        ? "py-2 px-4 cursor-pointer text-center rounded-md transition-all ease-in-out duration-300"
+                        : "py-2 px-4 cursor-pointer text-center transition-all ease-in-out duration-300"
+                    }
+                  >
+                    <h2
+                      className={
+                        isActive
+                          ? "text-primary font-semibold text-xl transition-all ease-in-out duration-300"
+                          : "text-gray-200 font-semibold text-lg transition-all ease-in-out duration-300"
+                      }
+                    >
+                      {item.name}
+                    </h2>
+                  </div>
+                </Link>
+              );
+            })}
+          </section>
+        </div>
       </div>
     </nav>
   );
