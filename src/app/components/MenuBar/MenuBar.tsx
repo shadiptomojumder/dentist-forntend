@@ -10,8 +10,7 @@ interface openProps {
 
 const MenuBar = ({ setopen, open }: openProps) => {
   const [change, setChange] = useState(false);
-  console.log("The  menuOpen in menubar file:", open);
-  console.log("The  change in menubar file:", change);
+
   useEffect(()=>{
     if (open == false) {
       setChange(false);

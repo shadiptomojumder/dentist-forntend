@@ -1,13 +1,27 @@
 "use client"
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/useAuth";
 import { log } from "console";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const HeroSection = () => {
   const { theme } = useTheme();
+  const { user, setUser, userLoading } = useAuth();
+  const router = useRouter();
+
+  // console.log("user is",user);
+  
+  const bookAppoinrment = () => {
+    if (!user) {
+      router.push("/login")
+    }else{
+      router.push("/appointment")
+    }
+  }
  
   
   return (
@@ -40,11 +54,16 @@ const HeroSection = () => {
               have Complete dental care - From Cleanings to Implants. Painless Dentistry - Relaxing Experience, Exceptional Results. Affordable Dental Care for Every Smile  
             </p>
             <div className="flex items-center md:justify-start justify-center">
-              <Link href="/appointment">
+              {/* <Link href="/appointment">
                 <Button className="bg-primary hover:bg-primary text-black font-semibold hover:shadow-md">
                   Book Appointment
                 </Button>
-              </Link>
+              </Link> */}
+              
+                <Button onClick={bookAppoinrment} className="bg-primary hover:bg-primary text-black font-semibold hover:shadow-md">
+                  Book Appointment
+                </Button>
+              
             </div>
           </div>
         </div>

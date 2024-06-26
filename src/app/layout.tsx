@@ -27,18 +27,12 @@ export default function RootLayout({
       <body className={inter.className}>
         <UserContextProvider>
           <TanstackProvider>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              themes={["dark", "light", "orange"]}
-              disableTransitionOnChange
-            >
+            
               <Header/>
               {children}
               <Toaster richColors/>
               <Footer/>
-            </ThemeProvider>
+            
           </TanstackProvider>
         </UserContextProvider>
       </body>
