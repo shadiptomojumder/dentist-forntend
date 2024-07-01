@@ -1,10 +1,12 @@
-import React from 'react';
-
 const SuccessPage = () => {
     return (
-        <div>
-            <h2>This is transation success page</h2>
-        </div>
+        <main>
+            <section className="container py-10">
+                <h2 className="text-2xl font-semibold capitalize">
+                    This is Payment success page
+                </h2>
+            </section>
+        </main>
     );
 };
 
