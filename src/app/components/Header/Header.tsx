@@ -106,7 +106,7 @@ const Header = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-[500] bg-[#BFD8AF] dark:bg-[#040D12] dark:bg-opacity-[0.9] dark:backdrop-blur-md shadow-md">
+    <nav className="sticky top-0 z-[50] bg-[#BFD8AF] dark:bg-[#040D12] dark:bg-opacity-[0.9] dark:backdrop-blur-md shadow-md">
       <div className="container bg-[#040D12] relative mx-auto px-3 flex md:flex-row flex-col justify-between items-center md:gap-0 py-3">
         <div className="flex items-center justify-between md:w-auto w-full">
           <Link href="/">
@@ -146,7 +146,7 @@ const Header = () => {
                           </div>
                         )}
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="z-[500]">
+                      <DropdownMenuContent align="end" className="z-[100]">
                         <DropdownMenuItem className="py-1">
                           {user?.fullname}
                         </DropdownMenuItem>
@@ -310,7 +310,7 @@ const Header = () => {
         {/* This is for mobile devices */}
 
         <div
-          className={`w-dvw h-dvh lg:hidden transition-all duration-500 -z-[100] backdrop-blur-md bg-black bg-opacity-90 absolute top-[100%] left-0 ${
+          className={`w-dvw h-dvh lg:hidden transition-all duration-300 -z-[100] backdrop-blur-md bg-black bg-opacity-90 absolute top-[100%] left-0 ${
             menuOpen
               ? "translate-y-0 opacity-100 skew-y-12"
               : "-translate-y-full opacity-0"
@@ -318,7 +318,7 @@ const Header = () => {
         ></div>
 
         <div
-          className={`-z-[40] bg-gray-900 w-full py-20 absolute top-[100%] left-0 duration-500 ${
+          className={`-z-[40] bg-gray-900 w-full py-20 absolute top-[100%] left-0 duration-300 ${
             menuOpen ? "translate-y-0 scale-100" : "-translate-y-full scale-50 "
           }`}
         >
