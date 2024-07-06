@@ -133,6 +133,8 @@ const UserDashboardProfile = () => {
         setValue("phone", user?.phone?.toString());
       }
       if (user?.avatar) {
+        console.log("Avatar is:", user?.avatar);
+        
         setPreviewImage(user?.avatar as string);
       }
       // ... other fields

@@ -54,15 +54,15 @@ const HeroSection = () => {
               have Complete dental care - From Cleanings to Implants. Painless Dentistry - Relaxing Experience, Exceptional Results. Affordable Dental Care for Every Smile  
             </p>
             <div className="flex items-center md:justify-start justify-center">
-              {/* <Link href="/appointment">
+              <Link href="/appointment">
                 <Button className="bg-primary hover:bg-primary text-black font-semibold hover:shadow-md">
                   Book Appointment
                 </Button>
-              </Link> */}
+              </Link>
               
-                <Button onClick={bookAppoinrment} className="bg-primary hover:bg-primary text-black font-semibold hover:shadow-md">
+                {/* <Button onClick={bookAppoinrment} className="bg-primary hover:bg-primary text-black font-semibold hover:shadow-md">
                   Book Appointment
-                </Button>
+                </Button> */}
               
             </div>
           </div>

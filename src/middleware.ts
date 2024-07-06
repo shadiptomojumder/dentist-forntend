@@ -26,18 +26,45 @@ export function middleware(request: NextRequest) {
     const isPublicPath = publicPaths.includes(pathname);
 
     const token = request.cookies.get('accessToken')?.value || ''
+    const AccessToken = request.cookies.get('accessTokenByF')?.value || ''
     console.log("The token in middleware line 34:",token);
+    console.log("The AccessToken in middleware line 34:",AccessToken);
 
-    // const decoded = decodeToken(token);
-    // console.log("decodeToken",decoded);
+    const decoded = decodeToken(AccessToken);
+    console.log("decodeToken",decoded);
     
-    if(isPublicPath && token) {
+    if(isPublicPath && AccessToken) {
         return NextResponse.redirect(new URL('/', request.nextUrl))
     }
     
-    if (!isPublicPath && !token) {
+    if (!isPublicPath && !AccessToken) {
         return NextResponse.redirect(new URL('/login', request.nextUrl))
     }
+
+    if (pathname.startsWith('/user-dashboard') && (!decoded || (decoded.role !== 'user'))) {
+        console.log("User not authorized for /dashboard path");
+        return NextResponse.redirect(new URL('/login', request.nextUrl));
+    }
+
+    // if (pathname.startsWith('/dashboard') && (!decoded || (decoded.role !== 'admin' && decoded.role !== 'super-admin'))) {
+    //     console.log("User not authorized for /dashboard path");
+    //     return NextResponse.redirect(new URL('/login', request.nextUrl));
+    // }
+
+      // Role-based access control for protected routes
+  const allowedRoles: { [key: string]: string[] } = {
+    '/dashboard': ['admin','super-admin'],
+    '/dashboard/dashboard-create-appointment': ['admin','super-admin'],
+    '/dashboard/dashboard-users': ['super-admin'],
+    // Add more protected routes and their allowed roles here
+  };
+
+  // Check if the user role matches the allowed roles for the requested path
+  if (allowedRoles[pathname] && decoded && decoded.role && !allowedRoles[pathname].includes(decoded.role)) {
+    console.log("Unauthorized access for role:", decoded?.role);
+    return NextResponse.redirect(new URL('/login', request.nextUrl));
+  }
+    
 
     // Otherwise, allow the request to proceed
     return NextResponse.next()
@@ -45,7 +72,7 @@ export function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-    matcher: ['/login','/signup'],
+    matcher: ['/login','/signup','/appointment','/dashboard/:path*','/user-dashboard/:path*'],
 }
 
 // matcher: ['/dashboard/:path*','/user-dashboard/:path*','/login','/signup','/appointment'],
