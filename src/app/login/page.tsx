@@ -55,12 +55,20 @@ const LoginPage = () => {
                     "userData",
                     JSON.stringify(response.data.loggedInUser)
                 );
+                localStorage.setItem(
+                    "accessToken",
+                    JSON.stringify(response?.data?.accessToken)
+                );
+                localStorage.setItem(
+                    "refreshToken",
+                    JSON.stringify(response?.data?.refreshToken)
+                );
                 // Set cookie using document.cookie
                 const accessToken = response.data.accessToken;
                 const expires = new Date();
                 expires.setTime(expires.getTime() + 7 * 24 * 60 * 60 * 1000); // Cookie expires in 7 days
 
-                document.cookie = `accessTokenByF=${accessToken}; expires=${expires.toUTCString()}; path=/; secure; samesite=strict`;
+                document.cookie = `middlewareToken=${accessToken}; expires=${expires.toUTCString()}; path=/; secure; samesite=strict`;
                 setUser(response.data.loggedInUser);
                 router.push("/");
             }

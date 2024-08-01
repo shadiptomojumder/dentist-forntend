@@ -26,7 +26,7 @@ export function middleware(request: NextRequest) {
     const isPublicPath = publicPaths.includes(pathname);
 
     const token = request.cookies.get('accessToken')?.value || ''
-    const AccessToken = request.cookies.get('accessTokenByF')?.value || ''
+    const AccessToken = request.cookies.get('middlewareToken')?.value || ''
     console.log("The token in middleware line 34:",token);
     console.log("The AccessToken in middleware line 34:",AccessToken);
 
@@ -41,7 +41,7 @@ export function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL('/login', request.nextUrl))
     }
 
-    if (pathname.startsWith('/user-dashboard') && (!decoded || (decoded.role !== 'user'))) {
+    if (pathname.startsWith('/user-dashboard') && (!decoded || !['user', 'admin', 'super-admin'].includes(decoded.role))) {
         console.log("User not authorized for /dashboard path");
         return NextResponse.redirect(new URL('/login', request.nextUrl));
     }

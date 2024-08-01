@@ -52,9 +52,10 @@ const Header = () => {
     const pathname = usePathname();
     const router = useRouter();
     const { user, setUser, userLoading } = useContext(UserContext);
-    // console.log("The  userData in header is:", user);
+    console.log("The  userData in header is:", user);
     // console.log("The  userData in header is:", userLoading);
     // console.log("The  menuOpen in header file:", menuOpen);
+    const userId = user?._id;
 
     // sidebar menu for mobile devices
     const [showSideBar, setShowSideBar] = useState<boolean>(false);
@@ -87,18 +88,21 @@ const Header = () => {
         };
     }, [menuOpen]);
 
+
     // Logout Function
     const handleLogout = async () => {
         try {
-            const response = await Logout();
+            const userId = user?._id;
+            console.log("userId is:",userId);
+            const response = await Logout({userId});
             console.log("The Logout Response is", response);
 
             if (response.statusCode === 200) {
                 toast.success("User successfully Logout");
-                localStorage.removeItem("userData");
+                localStorage.clear();
                 setUser(null);
                 // Clear the access token cookie
-                document.cookie = `accessTokenByF=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; secure; samesite=strict`;
+                document.cookie = ""
 
                 router.push("/");
                 router.refresh();
