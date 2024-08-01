@@ -67,7 +67,7 @@ const UserContextProvider: FC<UserContextProviderProps> = ({children}) => {
           } catch (error) {
             console.error("Error parsing stored user data:", error);
             // Handle the error appropriately (e.g., clear the invalid data from localStorage)
-            localStorage.removeItem('userData');
+            localStorage.clear()
           }
         } else{
           setUserLoading(false);
