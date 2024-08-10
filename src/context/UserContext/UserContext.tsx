@@ -1,6 +1,7 @@
 "use client";
 import Logout from "@/api/user/logout";
 import { differenceInMilliseconds, formatDistanceToNow } from "date-fns";
+import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
 import React, {
@@ -11,7 +12,6 @@ import React, {
     useState,
 } from "react";
 import { toast } from "sonner";
-import { number } from "zod";
 
 interface DecodedToken {
     _id: string;
@@ -124,12 +124,9 @@ const UserContextProvider: FC<UserContextProviderProps> = ({ children }) => {
                                 );
                                 localStorage.clear();
                                 setUser(null);
-                                document.cookie.split(";").forEach((cookie) => {
-                                    const cookieName = cookie
-                                        .split("=")[0]
-                                        .trim();
-                                    document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-                                });
+                                Cookies.remove("accessToken");
+                                Cookies.remove("refreshToken");
+                                Cookies.remove("middlewareToken");
                                 router.push("/login");
                             } else {
                                 console.error("Logout failed:", response);
@@ -143,7 +140,9 @@ const UserContextProvider: FC<UserContextProviderProps> = ({ children }) => {
                         toast.error("Session expired. Please log in again");
                         localStorage.clear();
                         setUser(null);
-                        document.cookie = "";
+                        Cookies.remove("accessToken");
+                        Cookies.remove("refreshToken");
+                        Cookies.remove("middlewareToken");
                         router.push("/login");
                     }
                 }

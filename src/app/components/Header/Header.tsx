@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Skeleton } from "@/components/ui/skeleton";
 import { UserContext } from "@/context/UserContext/UserContext";
+import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -100,9 +101,19 @@ const Header = () => {
                 toast.success("User successfully Logout");
                 localStorage.clear();
                 setUser(null);
-                // Clear the access token cookie
-                document.cookie = "";
-                document.cookie = "middlewareToken=; SameSite=None; Secure";
+                // Clear the cookie
+                // const cookies = document.cookie.split(";");
+
+                // // Iterate over all cookies and delete each one
+                // cookies.forEach((cookie) => {
+                //     const cookieName = cookie.split("=")[0].trim();
+                //     // Remove the cookie by setting its expiration date to the past
+                //     document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; secure; samesite=strict`;
+                // });
+
+                Cookies.remove("accessToken");
+                Cookies.remove("refreshToken");
+                Cookies.remove("middlewareToken");
 
                 router.push("/");
                 router.refresh();
