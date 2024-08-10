@@ -11,6 +11,7 @@ import React, {
     useState,
 } from "react";
 import { toast } from "sonner";
+import { number } from "zod";
 
 interface DecodedToken {
     _id: string;
@@ -33,6 +34,7 @@ interface User {
     _id: string;
     fullname: string;
     email: string;
+    phone: string | number;
     role?: string;
     avatar?: string;
     refreshToken?: string;
