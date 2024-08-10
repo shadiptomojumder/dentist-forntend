@@ -1,5 +1,5 @@
 import axios from "axios";
-const BaseURL = "http://localhost:5000/api";
+const BaseURL = "https://dentist-backend-production.up.railway.app/api";
 
 export const api = axios.create({
     baseURL: BaseURL,
