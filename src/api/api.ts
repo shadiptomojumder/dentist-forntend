@@ -1,5 +1,5 @@
 import axios from "axios";
-const BaseURL = "https://dentist-backend-production.up.railway.app/api";
+const BaseURL = "http://localhost:5000/api";
 
 export const api = axios.create({
     baseURL: BaseURL,
@@ -8,8 +8,6 @@ export const api = axios.create({
     withCredentials: true,
 });
 
-// https://dentist-backend-phee.onrender.com
-// https://dentist-backend-one.vercel.app
 // http://localhost:5000
 // https://dentist-backend-production.up.railway.app
 

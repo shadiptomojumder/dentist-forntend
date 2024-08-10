@@ -88,13 +88,12 @@ const Header = () => {
         };
     }, [menuOpen]);
 
-
     // Logout Function
     const handleLogout = async () => {
         try {
             const userId = user?._id;
-            console.log("userId is:",userId);
-            const response = await Logout({userId});
+            console.log("userId is:", userId);
+            const response = await Logout({ userId });
             console.log("The Logout Response is", response);
 
             if (response.statusCode === 200) {
@@ -102,7 +101,8 @@ const Header = () => {
                 localStorage.clear();
                 setUser(null);
                 // Clear the access token cookie
-                document.cookie = ""
+                document.cookie = "";
+                document.cookie = "middlewareToken=; SameSite=None; Secure";
 
                 router.push("/");
                 router.refresh();
@@ -117,13 +117,9 @@ const Header = () => {
             <div className="container bg-[#040D12] relative mx-auto px-3 flex md:flex-row flex-col justify-between items-center md:gap-0 py-3">
                 <div className="flex items-center justify-between md:w-auto w-full">
                     <Link href="/">
-                        {userLoading ? (
-                            <Skeleton className="w-[100px] h-10 rounded-full bg-gray-600" />
-                        ) : (
-                            <h1 className="text-2xl font-extrabold dark:text-primary text-nowrap">
-                                Dental Care.
-                            </h1>
-                        )}
+                        <h1 className="text-2xl font-extrabold dark:text-primary text-nowrap">
+                            Dental Care.
+                        </h1>
                     </Link>
                     <section className="flex items-center gap-4">
                         <div className="md:hidden">
@@ -233,25 +229,18 @@ const Header = () => {
                         const isActive = pathname === navlink.link;
                         return (
                             <>
-                                {userLoading ? (
-                                    <Skeleton
-                                        key={index}
-                                        className="w-[80px] h-8 rounded-full bg-gray-500"
-                                    />
-                                ) : (
-                                    <Link key={index} href={`${navlink?.link}`}>
-                                        <Button
-                                            variant={"ghost"}
-                                            className={
-                                                isActive
-                                                    ? "bg-[#092635] font-extrabold text-base text-primary hover:text-primary hover:bg-[#FEFAE0] dark:hover:bg-[#092635]"
-                                                    : "font-bold text-base text-primary hover:text-primary hover:bg-[#FEFAE0] dark:hover:bg-[#092635]"
-                                            }
-                                        >
-                                            {navlink?.name}
-                                        </Button>
-                                    </Link>
-                                )}
+                                <Link key={index} href={`${navlink?.link}`}>
+                                    <Button
+                                        variant={"ghost"}
+                                        className={
+                                            isActive
+                                                ? "bg-[#092635] font-extrabold text-base text-primary hover:text-primary hover:bg-[#FEFAE0] dark:hover:bg-[#092635]"
+                                                : "font-bold text-base text-primary hover:text-primary hover:bg-[#FEFAE0] dark:hover:bg-[#092635]"
+                                        }
+                                    >
+                                        {navlink?.name}
+                                    </Button>
+                                </Link>
                             </>
                         );
                     })}

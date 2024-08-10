@@ -98,6 +98,7 @@ function DataTableFilterByDate<TData, TValue>({
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
+          <SelectItem value="all">All</SelectItem>
             {filteredOptions.map((option) => {
               return (
                 <SelectItem value={option.value} key={option.value}>
@@ -105,7 +106,7 @@ function DataTableFilterByDate<TData, TValue>({
                 </SelectItem>
               );
             })}
-            <SelectItem value="all">All</SelectItem>
+            
           </SelectGroup>
         </SelectContent>
       </Select>
