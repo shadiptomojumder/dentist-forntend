@@ -20,6 +20,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import Spinner from "../components/Spinner/Spinner";
+import Cookies from 'js-cookie';
 
 const formSchema = z.object({
     email: z.string().email({
@@ -65,10 +66,11 @@ const LoginPage = () => {
                 );
                 // Set cookie using document.cookie
                 const accessToken = response.data.accessToken;
-                const expires = new Date();
-                expires.setTime(expires.getTime() + 7 * 24 * 60 * 60 * 1000); // Cookie expires in 7 days
+                //const expires = new Date();
+                //expires.setTime(expires.getTime() + 7 * 24 * 60 * 60 * 1000); // Cookie expires in 7 days
 
-                document.cookie = `middlewareToken=${accessToken}; expires=${expires.toUTCString()}; path=/; secure; samesite=strict`;
+                //document.cookie = `middlewareToken=${accessToken}; expires=${expires.toUTCString()}; path=/; secure; samesite=strict`;
+                Cookies.set('middlewareToken', `${accessToken}`)
                 setUser(response.data.loggedInUser);
                 router.push("/");
             }
