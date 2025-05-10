@@ -3,8 +3,9 @@ import type { NextRequest } from 'next/server';
 import {jwtDecode} from 'jwt-decode';
 
 interface DecodedToken {
-    _id: string;
-    fullname: string;
+    id: string;
+    firstName: string;
+    lastName: string;
     email: string;
     role: string; 
   }

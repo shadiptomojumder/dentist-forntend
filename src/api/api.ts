@@ -1,8 +1,8 @@
 import axios from "axios";
-const BaseURL = "https://dentist-backend-production.up.railway.app/api";
+const BaseURL = "https://dentist-backend-one.vercel.app";
 
 export const api = axios.create({
-    baseURL: BaseURL,
+    baseURL: process.env.NEXT_PUBLIC_API_URL,
     timeout: 10000,
     headers: { "X-Custom-Header": "foobar" },
     withCredentials: true,
