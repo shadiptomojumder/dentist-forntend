@@ -1,15 +1,16 @@
 import axios from "axios";
 const BaseURL = "https://dentist-backend-one.vercel.app/api";
+console.log("NEXT_PUBLIC_API_URL is:", process.env.NEXT_PUBLIC_API_URL);
 
 export const api = axios.create({
-    baseURL: BaseURL,
+    baseURL: process.env.NEXT_PUBLIC_API_URL || "https://demmoserver.com/api",
     timeout: 10000,
-    headers: { "X-Custom-Header": "foobar" },
+    headers: {
+        "X-Custom-Header": "foobar",
+        "Content-Type": "application/json",
+    },
     withCredentials: true,
 });
-
-// http://localhost:5000
-// https://dentist-backend-production.up.railway.app
 
 // Add a request interceptor
 api.interceptors.request.use(
@@ -64,8 +65,9 @@ api.interceptors.response.use(
                     console.log("New Access Token:", accessToken);
 
                     // Update the authorization header with the new access token.
-                    api.defaults.headers.common["Authorization"] =
-                        `Bearer ${accessToken}`;
+                    api.defaults.headers.common[
+                        "Authorization"
+                    ] = `Bearer ${accessToken}`;
 
                     return api(originalRequest); // Retry the original request with the new access token.
                 }
